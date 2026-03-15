@@ -1,0 +1,128 @@
+% ----------------------------------------------------------------------------------------------------- %
+% Relatório 1 de PDS - Baseado na classe UFTeX
+% ----------------------------------------------------------------------------------------------------- %
+
+\documentclass[tcc]{../UFTeX/classe_uftex/uftex}
+% ---- Esse comando cria o nome uftex estilizado
+\newcommand\uftex{UF\TeX}
+
+\usepackage{lipsum}
+\usepackage{tikz}
+\usepackage[siunitx]{circuitikz}
+\usetikzlibrary{arrows}
+
+\usepackage[alf,abnt-emphasize=bf]{../UFTeX/referencias_abnt/abntex2cite}
+\renewcommand{\backrefpagesname}{}
+\renewcommand{\backref}{}
+\renewcommand*{\backrefalt}[4]{}
+
+% ---- Início do documento
+\begin{document}
+  % ---- Descrição do título do trabalho 
+  \title{Relatório 1 de PDS: Sinais Fundamentais Discretos}
+  % ---- Nome do autor ou autores do trabalho
+  \author{Maurício}{Carvalho}
+  % ---- Nome do orientador do trabalho.
+  \advisor{Prof.}{Nome do}{Professor}{Dr.}
+
+  % ---- Departamento
+  \department{EE} % ou o departamento correto
+  
+  % ---- Data
+  \date{17}{03}{2026}
+  
+  % ---- Palavras-chaves
+  \keyword{Processamento Digital de Sinais}
+  \keyword{Sinais Discretos}
+  \keyword{Octave}
+
+  % ---- Palavras-chaves em inglês
+  \foreignkeyword{Digital Signal Processing}
+  \foreignkeyword{Discrete Signals}
+  \foreignkeyword{Octave}
+  
+  \maketitle
+  \frontmatter
+
+  % ---- Cria o sumário
+  \tableofcontents 
+  
+  % --- Marca o inicio dos elementos textuais
+  \mainmatter
+  \onehalfspacing
+
+% ----------------------------------------------------------------------------------------------------- %
+% Capítulos do trabalho
+% ----------------------------------------------------------------------------------------------------- %
+
+\chapter{Introdução}
+Este relatório tem como objetivo apresentar os resultados obtidos no primeiro laboratório da disciplina de Processamento Digital de Sinais (PDS), que aborda o tema de Sinais Fundamentais Discretos.
+
+Nesta prática, explorou-se a geração e plotagem de sinais discretos no tempo, bem como operações matemáticas entre eles, através de rotinas desenvolvidas na ferramenta Octave.
+
+\chapter{Metodologia e Procedimentos Práticos}
+
+De acordo com o roteiro do laboratório, foram realizadas as seguintes atividades no Octave:
+
+\section{Parte I - Sinais Fundamentais Discretos}
+Foi solicitado gerar e plotar os seguintes sinais fundamentais discretos no tempo, na faixa de $-20 \leq n \leq 40$:
+\begin{itemize}
+    \item \textbf{a)} Função impulso unitário.
+    \item \textbf{b)} Função degrau unitário.
+    \item \textbf{b)} Função rampa.
+    \item \textbf{d)} Sinal exponencial real discreto $x_{1}[n] = (0,80)^{n}$.
+    \item \textbf{e)} Sinal senoidal discreto: $x_{2}[n] = 2\cos\left[2\pi(0,3)n + \frac{\pi}{3}\right]$.
+    \item \textbf{f)} Sinal exponencial complexo: $x_{3}[n] = (0,9e^{j\pi/10})^{n}$. Para este sinal, deve-se plotar a parte real, a parte imaginária, a magnitude e a fase.
+\end{itemize}
+
+\section{Parte II - Operações com Sinais}
+Sejam os sinais $A[n] = \{-1,0, 1, 2, 3, 4, 4, 4, 4\}$ e $B[n] = \{1,1,1,1,0,-1,-1,-1,-1\}$. Foram calculados e plotados os seguintes sinais discretos:
+\begin{enumerate}
+    \item[a)] $X_1[n] = 2A[n] - B[n]$
+    \item[b)] $X_2[n] = A[n] + 3B[n]$
+    \item[c)] $X_3[n] = X_2[-n]$
+\end{enumerate}
+
+\section{Parte III - Plotagem de Sequências}
+Também foi necessário plotar as seguintes sequências:
+\begin{enumerate}
+    \item[a)] $x[n] = 3\delta(n + 2) - 0,5\delta(n) + 5\delta(n - 1) - 4\delta(n - 5)$
+    \item[b)] $y[n] = \delta(n + 1) - 2\delta(n - 1) + 5\delta(n - 4)$
+\end{enumerate}
+
+\section{Parte IV - Periodicidade de Sequências}
+Gerou-se e plotou-se as sequências:
+\begin{enumerate}
+    \item[a)] $\cos[0,1n - \pi]$, para $-20 \leq n \leq 20$
+    \item[b)] $\cos[0,1n - \pi]$, para $-10 \leq n \leq 20$
+\end{enumerate}
+Além disso, verificou-se analiticamente se as referidas sequências são periódicas e qual o seu período fundamental.
+
+\chapter{Resultados e Discussões}
+
+\textit{[Insira aqui os gráficos gerados no Octave e a discussão dos resultados para cada parte do experimento.]}
+
+\section{Resultados da Parte I}
+% Exemplo de como inserir imagem:
+% \begin{figure}[!htpb]
+% \centering
+% \includegraphics[width=0.8\textwidth]{grafico1.png}
+% \caption{Função Impulso Unitário.}\label{fig:impulso}
+% \end{figure}
+
+\section{Resultados da Parte II}
+
+\section{Resultados da Parte III}
+
+\section{Resultados da Parte IV}
+
+\chapter{Conclusão}
+\textit{[Insira aqui as conclusões a respeito da as atividades laboratoriais.]}
+
+% ----------------------------------------------------------------------------------------------------- %
+\backmatter 
+\singlespacing   
+% ----------------------------------------------------------------------------------------------------- %
+\bibliography{relatorio_1}
+
+\end{document}

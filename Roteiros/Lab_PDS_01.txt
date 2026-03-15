@@ -1,0 +1,30 @@
+  
+ 
+Laboratório PDS 01 
+Tema: Sinais Fundamentais Discretos 
+I – Gere e plote os seguintes sinais fundamentais discretos no tempo, na faixa 
+de -20 ≤ n ≤ 40. Use os comandos do Octave: 
+a) Função impulso unitário. 
+b) Função degrau unitário. 
+c) Função rampa. 
+d) Sinal exponencial real discreto 푥1[푛] = (0,80)푛 
+휋 e) Sinal senoidal discreto: 푥2[푛] = 2cos⁡[2휋(0,3)푛 + ] 3 
+f) Sinal exponencial complexo: 푥3[푛] = (0,9푒푗휋/10)푛 . Plote a parte real, parte 
+imaginaria, magnitude e fase. 
+II – Sejam os sinais A[n] = {-1,0, 1, 2, 3, 4, 4, 4, 4} e B[n] = {1,1,1,1,0,-1,-1,-1,-1}. 
+Calcule e plote os seguintes sinais discretos: 
+a) X1[n] = 2A[n] – B[n] 
+b) X2[n] = A[n] + 3B[n] 
+c) X3[n] =X2[-n] 
+III – Plote as seguintes sequências: 
+a) 푥[푛] = 3훿(푛 + 2) − 0,5훿(푛) + 5훿(푛 − 1) − 4훿(푛 − 5) 
+b) 푦[푛] = 훿(푛 + 1) − 2훿(푛 − 1) + 5훿(푛 − 4) 
+IV – Gere e plote as seguintes sequências: 
+a) cos[0,1푛 − 휋] , −20 ≤ 푛 ≤ 20 
+b) cos[0,1푛 − 휋] , −10 ≤ 푛 ≤ 20 
+As sequências (a) e (b) são periódicas? Se for, qual o período fundamental? 
+Observações: 
+- Os relatórios serão redigidos digitalmente na forma de um relatório acadêmico. 
+- Enviar o relatório ao AVA no formato PDF. 
+Data limite de Entrega: 17/03/2026 até meia noite 
+Palmas – Verão 2026 
