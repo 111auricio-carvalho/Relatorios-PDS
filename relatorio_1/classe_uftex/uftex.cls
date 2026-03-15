@@ -398,7 +398,7 @@ xrightmargin=10pt
   \ltx@ifpackageloaded{hyperref}{\uftex@hypersetup}{}%
  \begin{titlepage}
 \begin{center}
-\includegraphics[scale=.3]{../classe_uftex/logouft}\\
+\includegraphics[scale=.3]{classe_uftex/logouft}\\
 \setstretch{1}
 \MakeUppercase{\bf\frontcover@maintext}
 \end{center}
@@ -793,7 +793,7 @@ xrightmargin=10pt
 \renewcommand\maketitle{%
 \ltx@ifpackageloaded{hyperref}{\uftex@hypersetup}{}%
 \begin{minipage}{0.2\textwidth}% adapt widths of minipages to your needs
-\includegraphics[width=.8\linewidth]{../classe_uftex/logouft}
+\includegraphics[width=.8\linewidth]{classe_uftex/logouft}
 \end{minipage}%
 \hfill%
 \begin{minipage}{0.8\textwidth}\raggedright
