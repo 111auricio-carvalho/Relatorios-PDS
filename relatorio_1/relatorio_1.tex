@@ -124,89 +124,119 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 
 \chapter{Resultados e Discussões}
 
-\textit{Os códigos foram implementados na linguagem Octave e estão apresentados a seguir, seguidos das análises dos gráficos obtidos.}
+\textit{Para melhorar a organização deste relatório, os códigos desenvolvidos em Octave foram separados por item e estão apresentados a seguir, seguidos imediatamente pelos gráficos gerados por eles.}
 
 \section{Resultados da Parte I}
-Para gerar os sinais fundamentais discretos solicitados no intervalo $-20 \leq n \leq 40$, implementou-se o seguinte código:
 
-\begin{lstlisting}[language=Matlab, caption={Geração dos Sinais Fundamentais Discretos da Parte I}]
-n = -20:40; 
-x_a = (n == 0);                        % Impulso
-x_b = (n >= 0);                        % Degrau
-x_c = n .* (n >= 0);                   % Rampa
-x_d = (0.80) .^ n;                     % Exponencial real
-x_e = 2 * cos(2 * pi * 0.3 * n + pi/3); % Senoidal
-x_f = (0.9 * exp(1j * pi / 10)) .^ n;  % Exponencial complexo
+\subsection*{a) Função Impulso Unitário}
+\lstinputlisting[language=Matlab, caption={Código gerador do impulso unitário}]{codigos/parte1_a.m}
+\begin{figure}[!htpb]
+\centering
+\includegraphics[width=0.8\textwidth]{figuras/parte1_a.png}
+\caption{Função Impulso Unitário.}\label{fig:p1a}
+\end{figure}
 
-% Componentes
-x_f_real = real(x_f);
-x_f_imag = imag(x_f);
-x_f_mag  = abs(x_f);
-x_f_fase = angle(x_f);
-\end{lstlisting}
+\subsection*{b) Função Degrau Unitário}
+\lstinputlisting[language=Matlab, caption={Código gerador do degrau unitário}]{codigos/parte1_b.m}
+\begin{figure}[!htpb]
+\centering
+\includegraphics[width=0.8\textwidth]{figuras/parte1_b.png}
+\caption{Função Degrau Unitário.}\label{fig:p1b}
+\end{figure}
 
-\textit{[Insira aqui as figuras dos gráficos gerados pelo Octave]}
-% Exemplo de como inserir imagem:
-% \begin{figure}[!htpb]
-% \centering
-% \includegraphics[width=0.8\textwidth]{grafico1.png}
-% \caption{Função Impulso Unitário.}\label{fig:impulso}
-% \end{figure}
+\subsection*{c) Função Rampa}
+\lstinputlisting[language=Matlab, caption={Código gerador da rampa}]{codigos/parte1_c.m}
+\begin{figure}[!htpb]
+\centering
+\includegraphics[width=0.8\textwidth]{figuras/parte1_c.png}
+\caption{Função Rampa.}\label{fig:p1c}
+\end{figure}
+
+\subsection*{d) Sinal Exponencial Real Discreto}
+\lstinputlisting[language=Matlab, caption={Código gerador da exponencial real}]{codigos/parte1_d.m}
+\begin{figure}[!htpb]
+\centering
+\includegraphics[width=0.8\textwidth]{figuras/parte1_d.png}
+\caption{Sinal Exponencial Real.}\label{fig:p1d}
+\end{figure}
+
+\subsection*{e) Sinal Senoidal Discreto}
+\lstinputlisting[language=Matlab, caption={Código gerador do senoidal}]{codigos/parte1_e.m}
+\begin{figure}[!htpb]
+\centering
+\includegraphics[width=0.8\textwidth]{figuras/parte1_e.png}
+\caption{Sinal Senoidal.}\label{fig:p1e}
+\end{figure}
+
+\subsection*{f) Sinal Exponencial Complexo}
+\lstinputlisting[language=Matlab, caption={Código gerador da exponencial complexa e seus componentes}]{codigos/parte1_f.m}
+\begin{figure}[!htpb]
+\centering
+\includegraphics[width=0.8\textwidth]{figuras/parte1_f.png}
+\caption{Sinal Exponencial Complexo.}\label{fig:p1f}
+\end{figure}
 
 \section{Resultados da Parte II}
-Para realizar as operações com as sequências discretas $A[n]$ e $B[n]$, utilizou-se o seguinte código:
 
-\begin{lstlisting}[language=Matlab, caption={Operações com Sinais da Parte II}]
-A = [-1, 0, 1, 2, 3, 4, 4, 4, 4];
-n_A = 0 : length(A)-1; 
+\subsection*{a) $X_1[n] = 2A[n] - B[n]$}
+\lstinputlisting[language=Matlab, caption={Operação X1}]{codigos/parte2_a.m}
+\begin{figure}[!htpb]
+\centering
+\includegraphics[width=0.8\textwidth]{figuras/parte2_a.png}
+\caption{Operação matemática do vetor X1.}\label{fig:p2a}
+\end{figure}
 
-B = [1, 1, 1, 1, 0, -1, -1, -1, -1];
-n_B = 0 : length(B)-1; 
+\subsection*{b) $X_2[n] = A[n] + 3B[n]$}
+\lstinputlisting[language=Matlab, caption={Operação X2}]{codigos/parte2_b.m}
+\begin{figure}[!htpb]
+\centering
+\includegraphics[width=0.8\textwidth]{figuras/parte2_b.png}
+\caption{Operação matemática do vetor X2.}\label{fig:p2b}
+\end{figure}
 
-% a) X1[n] = 2A[n] - B[n]
-X1 = 2*A - B;
-
-% b) X2[n] = A[n] + 3B[n]
-X2 = A + 3*B;
-
-% c) X3[n] = X2[-n]
-X3 = fliplr(X2);
-n_X3 = -fliplr(n_A); % Inverte o eixo do tempo
-\end{lstlisting}
-
-\textit{[Insira aqui as figuras dos gráficos gerados e suas discussões]}
+\subsection*{c) $X_3[n] = X_2[-n]$}
+\lstinputlisting[language=Matlab, caption={Operação X3 com deslocamento}]{codigos/parte2_c.m}
+\begin{figure}[!htpb]
+\centering
+\includegraphics[width=0.8\textwidth]{figuras/parte2_c.png}
+\caption{Sinal rebatido no tempo.}\label{fig:p2c}
+\end{figure}
 
 \section{Resultados da Parte III}
-A plotagem estruturada com múltiplas funções impulso deslocadas no tempo foi realizada definindo-se uma função anônima no Octave:
 
-\begin{lstlisting}[language=Matlab, caption={Plotagem de Sequências com Impulsos da Parte III}]
-% Função anônima para impulso (delta de Kronecker)
-imp = @(n) (n == 0);
-n_III = -10:10; 
+\subsection*{a) Equação $x[n]$ com impulsos deslocados}
+\lstinputlisting[language=Matlab, caption={Código da equação x[n]}]{codigos/parte3_a.m}
+\begin{figure}[!htpb]
+\centering
+\includegraphics[width=0.8\textwidth]{figuras/parte3_a.png}
+\caption{Composição da função x[n] por funções impulso.}\label{fig:p3a}
+\end{figure}
 
-% a) x[n] = 3δ(n + 2) − 0,5δ(n) + 5δ(n − 1) − 4δ(n − 5)
-x_III_a = 3*imp(n_III + 2) - 0.5*imp(n_III) + 5*imp(n_III - 1) - 4*imp(n_III - 5);
-
-% b) y[n] = δ(n + 1) − 2δ(n − 1) + 5δ(n − 4)
-y_III_b = imp(n_III + 1) - 2*imp(n_III - 1) + 5*imp(n_III - 4);
-\end{lstlisting}
-
-\textit{[Insira aqui as figuras dos gráficos gerados]}
+\subsection*{b) Equação $y[n]$ com impulsos deslocados}
+\lstinputlisting[language=Matlab, caption={Código da equação y[n]}]{codigos/parte3_b.m}
+\begin{figure}[!htpb]
+\centering
+\includegraphics[width=0.8\textwidth]{figuras/parte3_b.png}
+\caption{Composição da função y[n] por funções impulso.}\label{fig:p3b}
+\end{figure}
 
 \section{Resultados da Parte IV}
-As sequências senoidais com frequências específicas foram geradas com o código abaixo para posterior verificação de periodicidade.
 
-\begin{lstlisting}[language=Matlab, caption={Geração e análise de Periodicidade da Parte IV}]
-% a) cos[0,1n - pi] , -20 <= n <= 20
-n_IV_a = -20:20;
-seq_a = cos(0.1*n_IV_a - pi);
+\subsection*{a) Sequência $\cos(0,1n - \pi)$ na restrição $[-20, 20]$}
+\lstinputlisting[language=Matlab, caption={Código a)}]{codigos/parte4_a.m}
+\begin{figure}[!htpb]
+\centering
+\includegraphics[width=0.8\textwidth]{figuras/parte4_a.png}
+\caption{Cossenoide a).}\label{fig:p4a}
+\end{figure}
 
-% b) cos[0,1n - pi] , -10 <= n <= 20
-n_IV_b = -10:20;
-seq_b = cos(0.1*n_IV_b - pi);
-\end{lstlisting}
-
-\textit{[Insira aqui os gráficos]}
+\subsection*{b) Sequência $\cos(0,1n - \pi)$ na restrição $[-10, 20]$}
+\lstinputlisting[language=Matlab, caption={Código b)}]{codigos/parte4_b.m}
+\begin{figure}[!htpb]
+\centering
+\includegraphics[width=0.8\textwidth]{figuras/parte4_b.png}
+\caption{Cossenoide b).}\label{fig:p4b}
+\end{figure}
 
 \subsection{Análise de Periodicidade}
 Sabe-se que um sinal discreto na forma $\cos(\Omega_0 n + \phi)$ é periódico se, e somente se, a relação $\frac{\Omega_0}{2\pi}$ for um número racional.
@@ -216,7 +246,7 @@ No caso proposto, a frequência angular é $\Omega_0 = 0,1$ rad/amostra. Assim, 
     N = \frac{2\pi m}{\Omega_0} = \frac{2\pi m}{0,1} = 20\pi m
 \end{equation}
 
-Como não existe um número inteiro $m$ diferente de zero que torne $N$ também um número inteiro (visto que a frequência está atrelada ao número irracional $\pi$), conclui-se que matematicamente **estas sequências não são periódicas**. No domínio discreto, as amostras não se repetem exatamente nos mesmos valores a cada ciclo.
+Como não existe um número inteiro $m$ diferente de zero que torne $N$ também um número inteiro (visto que a frequência está atrelada ao número irracional $\pi$), conclui-se que matematicamente \textbf{estas sequências não são periódicas}. No domínio discreto, as amostras não se repetem exatamente nos mesmos valores a cada ciclo.
 
 \chapter{Conclusão}
 \textit{[Insira aqui as conclusões a respeito da as atividades laboratoriais.]}
