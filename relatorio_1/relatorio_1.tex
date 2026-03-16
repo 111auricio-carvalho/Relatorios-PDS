@@ -154,10 +154,69 @@ x_f_fase = angle(x_f);
 % \end{figure}
 
 \section{Resultados da Parte II}
+Para realizar as operações com as sequências discretas $A[n]$ e $B[n]$, utilizou-se o seguinte código:
+
+\begin{lstlisting}[language=Matlab, caption={Operações com Sinais da Parte II}]
+A = [-1, 0, 1, 2, 3, 4, 4, 4, 4];
+n_A = 0 : length(A)-1; 
+
+B = [1, 1, 1, 1, 0, -1, -1, -1, -1];
+n_B = 0 : length(B)-1; 
+
+% a) X1[n] = 2A[n] - B[n]
+X1 = 2*A - B;
+
+% b) X2[n] = A[n] + 3B[n]
+X2 = A + 3*B;
+
+% c) X3[n] = X2[-n]
+X3 = fliplr(X2);
+n_X3 = -fliplr(n_A); % Inverte o eixo do tempo
+\end{lstlisting}
+
+\textit{[Insira aqui as figuras dos gráficos gerados e suas discussões]}
 
 \section{Resultados da Parte III}
+A plotagem estruturada com múltiplas funções impulso deslocadas no tempo foi realizada definindo-se uma função anônima no Octave:
+
+\begin{lstlisting}[language=Matlab, caption={Plotagem de Sequências com Impulsos da Parte III}]
+% Função anônima para impulso (delta de Kronecker)
+imp = @(n) (n == 0);
+n_III = -10:10; 
+
+% a) x[n] = 3δ(n + 2) − 0,5δ(n) + 5δ(n − 1) − 4δ(n − 5)
+x_III_a = 3*imp(n_III + 2) - 0.5*imp(n_III) + 5*imp(n_III - 1) - 4*imp(n_III - 5);
+
+% b) y[n] = δ(n + 1) − 2δ(n − 1) + 5δ(n − 4)
+y_III_b = imp(n_III + 1) - 2*imp(n_III - 1) + 5*imp(n_III - 4);
+\end{lstlisting}
+
+\textit{[Insira aqui as figuras dos gráficos gerados]}
 
 \section{Resultados da Parte IV}
+As sequências senoidais com frequências específicas foram geradas com o código abaixo para posterior verificação de periodicidade.
+
+\begin{lstlisting}[language=Matlab, caption={Geração e análise de Periodicidade da Parte IV}]
+% a) cos[0,1n - pi] , -20 <= n <= 20
+n_IV_a = -20:20;
+seq_a = cos(0.1*n_IV_a - pi);
+
+% b) cos[0,1n - pi] , -10 <= n <= 20
+n_IV_b = -10:20;
+seq_b = cos(0.1*n_IV_b - pi);
+\end{lstlisting}
+
+\textit{[Insira aqui os gráficos]}
+
+\subsection{Análise de Periodicidade}
+Sabe-se que um sinal discreto na forma $\cos(\Omega_0 n + \phi)$ é periódico se, e somente se, a relação $\frac{\Omega_0}{2\pi}$ for um número racional.
+
+No caso proposto, a frequência angular é $\Omega_0 = 0,1$ rad/amostra. Assim, para encontrarmos o período fundamental $N$:
+\begin{equation}
+    N = \frac{2\pi m}{\Omega_0} = \frac{2\pi m}{0,1} = 20\pi m
+\end{equation}
+
+Como não existe um número inteiro $m$ diferente de zero que torne $N$ também um número inteiro (visto que a frequência está atrelada ao número irracional $\pi$), conclui-se que matematicamente **estas sequências não são periódicas**. No domínio discreto, as amostras não se repetem exatamente nos mesmos valores a cada ciclo.
 
 \chapter{Conclusão}
 \textit{[Insira aqui as conclusões a respeito da as atividades laboratoriais.]}
