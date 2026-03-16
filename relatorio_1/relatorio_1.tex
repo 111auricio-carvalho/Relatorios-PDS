@@ -40,6 +40,25 @@
 }
 \makeatother
 
+% ---- Configuração de cores para código Octave/MATLAB
+\usepackage{xcolor}
+\definecolor{mygreen}{RGB}{28,172,0}
+\definecolor{mylilas}{RGB}{170,55,241}
+\lstset{language=Matlab,
+    breaklines=true,
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle={\tiny \color{black}},
+    numbersep=9pt,
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, 
+}
+
 % ---- Início do documento
 \begin{document}
   % ---- Descrição do título do trabalho 
