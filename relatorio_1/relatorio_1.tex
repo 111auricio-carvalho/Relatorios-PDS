@@ -40,25 +40,6 @@
 }
 \makeatother
 
-% ---- Configuração de cores para código Octave/MATLAB
-\usepackage{xcolor}
-\definecolor{mygreen}{RGB}{28,172,0}
-\definecolor{mylilas}{RGB}{170,55,241}
-\lstset{language=Matlab,
-    breaklines=true,
-    morekeywords={matlab2tikz},
-    keywordstyle=\color{blue},
-    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
-    identifierstyle=\color{black},
-    stringstyle=\color{mylilas},
-    commentstyle=\color{mygreen},
-    showstringspaces=false,
-    numbers=left,
-    numberstyle={\tiny \color{black}},
-    numbersep=9pt,
-    emph=[1]{for,end,break},emphstyle=[1]\color{red}, 
-}
-
 % ---- Início do documento
 \begin{document}
   % ---- Descrição do título do trabalho 
@@ -101,7 +82,7 @@
 \chapter{Introdução}
 Este relatório tem como objetivo apresentar os resultados obtidos no primeiro laboratório da disciplina de Processamento Digital de Sinais (PDS), que aborda o tema de Sinais Fundamentais Discretos.
 
-Nesta prática, explorou-se a geração e plotagem de sinais discretos no tempo, bem como operações matemáticas entre eles, através de rotinas desenvolvidas na ferramenta Octave.
+Nesta prática, explorou-se a geração e plotagem de sinais discretos no tempo, bem como operações matemáticas entre eles, através de rotinas desenvolvidas na ferramenta Octave \cite{octaveman}. As atividades seguiram as diretrizes do roteiro de laboratório \cite{roteiro01} e fundamentaram-se na literatura clássica de processamento de sinais \cite{oppenheim, ingle2017}.
 
 \chapter{Metodologia e Procedimentos Práticos}
 
@@ -268,15 +249,16 @@ No caso proposto, a frequência angular é $\Omega_0 = 0,1$ rad/amostra. Assim, 
 Como não existe um número inteiro $m$ diferente de zero que torne $N$ também um número inteiro (visto que a frequência está atrelada ao número irracional $\pi$), conclui-se que matematicamente \textbf{estas sequências não são periódicas}. No domínio discreto, as amostras não se repetem exatamente nos mesmos valores a cada ciclo.
 
 \chapter{Conclusão}
-A realização deste laboratório permitiu a consolidação prática dos conceitos de Processamento Digital de Sinais introduzidos previamente \cite{roteiro_pds}. A partir da ferramenta Octave \cite{octave_docs}, cuja sintaxe é amplamente simétrica ao MATLAB \cite{matlab_docs}, pôde-se modelar e visualizar com sucesso os sinais fundamentais discretos, como a função impulso, degrau, rampa e exponenciais complexas \cite{oppenheim}.
+Este laboratório proporcionou uma compreensão sólida sobre a representação e manipulação de sinais discretos no tempo. A implementação de funções básicas como impulso unitário, degrau, rampa e exponenciais complexas permitiu visualizar as propriedades fundamentais que formam a base do Processamento Digital de Sinais (PDS).
 
-Ademais, as operações de soma, subtração e inversão no tempo (rebatimento) entre vetores reforçaram a compreensão sobre manipulação de matrizes no domínio discreto. Por fim, a verificação da periodicidade de sequências senoidais ilustrou de forma clara o requerimento fundamental de que a frequência angular digital $\Omega_0$ seja um múltiplo racional de $2\pi$ para que o sinal apresente padrão de repetição periódica \cite{ingle_proakis}.
+As operações realizadas entre as sequências (soma, multiplicação escalar e rebatimento temporal) demonstraram como manipular digitalmente a informação contida nos sinais. Além disso, a análise de periodicidade reforçou a distinção crítica entre sinais contínuos e discretos, onde a periodicidade não depende apenas da frequência, mas da racionalidade da relação entre a frequência angular e $2\pi$.
+
+A utilização do Octave \cite{octaveman} e a consulta à documentação oficial \cite{matlabdoc} provaram ser ferramentas essenciais para a verificação prática dos conceitos teóricos discutidos em aula e apresentados na literatura \cite{ingle2017}. Conclui-se que o domínio da geração e caracterização destes sinais elementares é um passo indispensável para o estudo de sistemas lineares invariantes no tempo (LIT) e transformadas de frequência que serão abordadas nos próximos módulos da disciplina.
 
 % ----------------------------------------------------------------------------------------------------- %
 \backmatter 
 \singlespacing   
 % ----------------------------------------------------------------------------------------------------- %
-\nocite{*}
 \bibliography{relatorio_1}
 
 \end{document}
