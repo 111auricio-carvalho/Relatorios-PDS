@@ -10,36 +10,35 @@
 \usepackage{tikz}
 \usepackage[siunitx]{circuitikz}
 \usetikzlibrary{arrows}
+
+\usepackage[alf,abnt-emphasize=bf]{referencias_abnt/abntex2cite}
 \usepackage{xcolor}
 
-% ---- Definição de cores para o código
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
-% ---- Configuração do listings para cores no Matlab/Octave
 \lstset{
-    language=Matlab,
-    backgroundcolor=\color{backcolour},   
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{blue},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\small,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2
+  language=Matlab,
+  backgroundcolor=\color{backcolour},   
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{blue},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
 }
 
-\usepackage[alf,abnt-emphasize=bf]{referencias_abnt/abntex2cite}
 \renewcommand{\backrefpagesname}{}
 \renewcommand{\backref}{}
 \renewcommand*{\backrefalt}[4]{}
@@ -119,35 +118,35 @@ De acordo com o roteiro do laboratório, foram realizadas as seguintes atividade
 \section{Parte I - Sinais Fundamentais Discretos}
 Foi solicitado gerar e plotar os seguintes sinais fundamentais discretos no tempo, na faixa de $-20 \leq n \leq 40$:
 \begin{itemize}
-    \item[] \textbf{a)} Função impulso unitário.
-    \item[] \textbf{b)} Função degrau unitário.
-    \item[] \textbf{c)} Função rampa.
-    \item[] \textbf{d)} Sinal exponencial real discreto $x_{1}[n] = (0,80)^{n}$.
-    \item[] \textbf{e)} Sinal senoidal discreto: $x_{2}[n] = 2\cos\left[2\pi(0,3)n + \frac{\pi}{3}\right]$.
-    \item[] \textbf{f)} Sinal exponencial complexo: $x_{3}[n] = (0,9e^{j\pi/10})^{n}$. Para este sinal, deve-se plotar a parte real, a parte imaginária, a magnitude e a fase.
+    \item[\textbf{a)}] Função impulso unitário.
+    \item[\textbf{b)}] Função degrau unitário.
+    \item[\textbf{c)}] Função rampa.
+    \item[\textbf{d)}] Sinal exponencial real discreto $x_{1}[n] = (0,80)^{n}$.
+    \item[\textbf{e)}] Sinal senoidal discreto: $x_{2}[n] = 2\cos\left[2\pi(0,3)n + \frac{\pi}{3}\right]$.
+    \item[\textbf{f)}] Sinal exponencial complexo: $x_{3}[n] = (0,9e^{j\pi/10})^{n}$. Para este sinal, deve-se plotar a parte real, a parte imaginária, a magnitude e a fase.
 \end{itemize}
 
 \section{Parte II - Operações com Sinais}
 Sejam os sinais $A[n] = \{-1,0, 1, 2, 3, 4, 4, 4, 4\}$ e $B[n] = \{1,1,1,1,0,-1,-1,-1,-1\}$. Foram calculados e plotados os seguintes sinais discretos:
-\begin{itemize}
-    \item[] \textbf{a)} $X_1[n] = 2A[n] - B[n]$
-    \item[] \textbf{b)} $X_2[n] = A[n] + 3B[n]$
-    \item[] \textbf{c)} $X_3[n] = X_2[-n]$
-\end{itemize}
+\begin{enumerate}
+    \item[a)] $X_1[n] = 2A[n] - B[n]$
+    \item[b)] $X_2[n] = A[n] + 3B[n]$
+    \item[c)] $X_3[n] = X_2[-n]$
+\end{enumerate}
 
 \section{Parte III - Plotagem de Sequências}
 Também foi necessário plotar as seguintes sequências:
-\begin{itemize}
-    \item[] \textbf{a)} $x[n] = 3\delta(n + 2) - 0,5\delta(n) + 5\delta(n - 1) - 4\delta(n - 5)$
-    \item[] \textbf{b)} $y[n] = \delta(n + 1) - 2\delta(n - 1) + 5\delta(n - 4)$
-\end{itemize}
+\begin{enumerate}
+    \item[a)] $x[n] = 3\delta(n + 2) - 0,5\delta(n) + 5\delta(n - 1) - 4\delta(n - 5)$
+    \item[b)] $y[n] = \delta(n + 1) - 2\delta(n - 1) + 5\delta(n - 4)$
+\end{enumerate}
 
 \section{Parte IV - Periodicidade de Sequências}
 Gerou-se e plotou-se as sequências:
-\begin{itemize}
-    \item[] \textbf{a)} $\cos[0,1n - \pi]$, para $-20 \leq n \leq 20$
-    \item[] \textbf{b)} $\cos[0,1n - \pi]$, para $-10 \leq n \leq 20$
-\end{itemize}
+\begin{enumerate}
+    \item[a)] $\cos[0,1n - \pi]$, para $-20 \leq n \leq 20$
+    \item[b)] $\cos[0,1n - \pi]$, para $-10 \leq n \leq 20$
+\end{enumerate}
 Além disso, verificou-se analiticamente se as referidas sequências são periódicas e qual o seu período fundamental.
 
 \chapter{Resultados e Discussões}
