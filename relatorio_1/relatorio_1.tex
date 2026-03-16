@@ -14,29 +14,35 @@
 \usepackage[alf,abnt-emphasize=bf]{referencias_abnt/abntex2cite}
 \usepackage{xcolor}
 
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{vscodeblue}{rgb}{0.34, 0.61, 0.84}
+\definecolor{vscodegreen}{rgb}{0.29, 0.61, 0.40}
+\definecolor{vscodeorange}{rgb}{0.81, 0.54, 0.39}
+\definecolor{vscodeback}{rgb}{0.11, 0.11, 0.11}
+\definecolor{vscodeline}{rgb}{0.5, 0.5, 0.5}
 
 \lstset{
   language=Matlab,
-  backgroundcolor=\color{backcolour},   
-  commentstyle=\color{codegreen},
-  keywordstyle=\color{blue},
-  numberstyle=\tiny\color{codegray},
-  stringstyle=\color{codepurple},
-  basicstyle=\ttfamily\footnotesize,
+  backgroundcolor=\color{vscodeback},   
+  commentstyle=\color{vscodegreen},
+  keywordstyle=\color{vscodeblue}\bfseries,
+  numberstyle=\small\color{vscodeline},
+  stringstyle=\color{vscodeorange},
+  basicstyle=\ttfamily\small\color{white},
   breakatwhitespace=false,         
   breaklines=true,                 
   captionpos=b,                    
   keepspaces=true,                 
   numbers=left,                    
-  numbersep=5pt,                  
+  numbersep=10pt,                  
   showspaces=false,                
   showstringspaces=false,
   showtabs=false,                  
-  tabsize=2
+  tabsize=2,
+  frame=leftline,
+  framerule=2pt,
+  rulecolor=\color{vscodeblue},
+  xleftmargin=15pt,
+  framexleftmargin=5pt
 }
 
 \renewcommand{\backrefpagesname}{}
@@ -129,23 +135,23 @@ Foi solicitado gerar e plotar os seguintes sinais fundamentais discretos no temp
 \section{Parte II - Operações com Sinais}
 Sejam os sinais $A[n] = \{-1,0, 1, 2, 3, 4, 4, 4, 4\}$ e $B[n] = \{1,1,1,1,0,-1,-1,-1,-1\}$. Foram calculados e plotados os seguintes sinais discretos:
 \begin{enumerate}
-    \item[a)] $X_1[n] = 2A[n] - B[n]$
-    \item[b)] $X_2[n] = A[n] + 3B[n]$
-    \item[c)] $X_3[n] = X_2[-n]$
+    \item[\textbf{a)}] $X_1[n] = 2A[n] - B[n]$
+    \item[\textbf{b)}] $X_2[n] = A[n] + 3B[n]$
+    \item[\textbf{c)}] $X_3[n] = X_2[-n]$
 \end{enumerate}
 
 \section{Parte III - Plotagem de Sequências}
 Também foi necessário plotar as seguintes sequências:
 \begin{enumerate}
-    \item[a)] $x[n] = 3\delta(n + 2) - 0,5\delta(n) + 5\delta(n - 1) - 4\delta(n - 5)$
-    \item[b)] $y[n] = \delta(n + 1) - 2\delta(n - 1) + 5\delta(n - 4)$
+    \item[\textbf{a)}] $x[n] = 3\delta(n + 2) - 0,5\delta(n) + 5\delta(n - 1) - 4\delta(n - 5)$
+    \item[\textbf{b)}] $y[n] = \delta(n + 1) - 2\delta(n - 1) + 5\delta(n - 4)$
 \end{enumerate}
 
 \section{Parte IV - Periodicidade de Sequências}
 Gerou-se e plotou-se as sequências:
 \begin{enumerate}
-    \item[a)] $\cos[0,1n - \pi]$, para $-20 \leq n \leq 20$
-    \item[b)] $\cos[0,1n - \pi]$, para $-10 \leq n \leq 20$
+    \item[\textbf{a)}] $\cos[0,1n - \pi]$, para $-20 \leq n \leq 20$
+    \item[\textbf{b)}] $\cos[0,1n - \pi]$, para $-10 \leq n \leq 20$
 \end{enumerate}
 Além disso, verificou-se analiticamente se as referidas sequências são periódicas e qual o seu período fundamental.
 
