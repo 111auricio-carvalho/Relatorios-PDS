@@ -14,34 +14,33 @@
 \usepackage[alf,abnt-emphasize=bf]{referencias_abnt/abntex2cite}
 \usepackage{xcolor}
 
-\definecolor{vscodeblue}{rgb}{0.34, 0.61, 0.84}
-\definecolor{vscodegreen}{rgb}{0.29, 0.61, 0.40}
-\definecolor{vscodeorange}{rgb}{0.81, 0.54, 0.39}
-\definecolor{vscodeback}{rgb}{0.11, 0.11, 0.11}
-\definecolor{vscodeline}{rgb}{0.5, 0.5, 0.5}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.98,0.98,0.98}
+\definecolor{codeblue}{rgb}{0,0,0.8}
 
 \lstset{
   language=Matlab,
-  backgroundcolor=\color{vscodeback},   
-  commentstyle=\color{vscodegreen},
-  keywordstyle=\color{vscodeblue}\bfseries,
-  numberstyle=\small\color{vscodeline},
-  stringstyle=\color{vscodeorange},
-  basicstyle=\ttfamily\small\color{white},
+  backgroundcolor=\color{backcolour},   
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{codeblue}\bfseries,
+  numberstyle=\normalsize\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\small\color{black},
   breakatwhitespace=false,         
   breaklines=true,                 
   captionpos=b,                    
   keepspaces=true,                 
   numbers=left,                    
-  numbersep=10pt,                  
+  numbersep=12pt,                  
   showspaces=false,                
   showstringspaces=false,
   showtabs=false,                  
   tabsize=2,
-  frame=leftline,
-  framerule=2pt,
-  rulecolor=\color{vscodeblue},
-  xleftmargin=15pt,
+  frame=lines,
+  rulecolor=\color{black!30},
+  xleftmargin=20pt,
   framexleftmargin=5pt
 }
 
