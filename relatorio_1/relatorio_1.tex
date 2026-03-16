@@ -14,6 +14,7 @@
 \usepackage[alf,abnt-emphasize=bf]{referencias_abnt/abntex2cite}
 \usepackage{xcolor}
 \usepackage{mathptmx} % Times New Roman (ABNT)
+\usepackage{float}
 
 \renewcommand{\lstlistingname}{Código}
 \renewcommand{\lstlistlistingname}{Lista de Códigos}
@@ -168,7 +169,7 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 
 \subsection*{a) Função Impulso Unitário}
 \lstinputlisting[language=Matlab, caption={{Gerador do impulso unitário.}}]{codigos/parte1_a.m}
-\begin{figure}[!htpb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figuras/parte1_a.png}
 \caption{Função Impulso Unitário.}\label{fig:p1a}
@@ -176,7 +177,7 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 
 \subsection*{b) Função Degrau Unitário}
 \lstinputlisting[language=Matlab, caption={{Gerador do degrau unitário.}}]{codigos/parte1_b.m}
-\begin{figure}[!htpb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figuras/parte1_b.png}
 \caption{Função Degrau Unitário.}\label{fig:p1b}
@@ -184,7 +185,7 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 
 \subsection*{c) Função Rampa}
 \lstinputlisting[language=Matlab, caption={{Gerador da rampa.}}]{codigos/parte1_c.m}
-\begin{figure}[!htpb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figuras/parte1_c.png}
 \caption{Função Rampa.}\label{fig:p1c}
@@ -192,7 +193,7 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 
 \subsection*{d) Sinal Exponencial Real Discreto}
 \lstinputlisting[language=Matlab, caption={{Gerador da exponencial real.}}]{codigos/parte1_d.m}
-\begin{figure}[!htpb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figuras/parte1_d.png}
 \caption{Sinal Exponencial Real.}\label{fig:p1d}
@@ -200,7 +201,7 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 
 \subsection*{e) Sinal Senoidal Discreto}
 \lstinputlisting[language=Matlab, caption={{Gerador do senoidal.}}]{codigos/parte1_e.m}
-\begin{figure}[!htpb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figuras/parte1_e.png}
 \caption{Sinal Senoidal.}\label{fig:p1e}
@@ -208,7 +209,7 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 
 \subsection*{f) Sinal Exponencial Complexo}
 \lstinputlisting[language=Matlab, caption={{Gerador da exponencial complexa e seus componentes.}}]{codigos/parte1_f.m}
-\begin{figure}[!htpb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figuras/parte1_f.png}
 \caption{Sinal Exponencial Complexo.}\label{fig:p1f}
@@ -218,7 +219,7 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 
 \subsection*{a) $X_1[n] = 2A[n] - B[n]$}
 \lstinputlisting[language=Matlab, caption={{Operação X1.}}]{codigos/parte2_a.m}
-\begin{figure}[!htpb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figuras/parte2_a.png}
 \caption{Operação matemática do vetor X1.}\label{fig:p2a}
@@ -226,7 +227,7 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 
 \subsection*{b) $X_2[n] = A[n] + 3B[n]$}
 \lstinputlisting[language=Matlab, caption={{Operação X2.}}]{codigos/parte2_b.m}
-\begin{figure}[!htpb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figuras/parte2_b.png}
 \caption{Operação matemática do vetor X2.}\label{fig:p2b}
@@ -234,7 +235,7 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 
 \subsection*{c) $X_3[n] = X_2[-n]$}
 \lstinputlisting[language=Matlab, caption={{Operação X3 com deslocamento.}}]{codigos/parte2_c.m}
-\begin{figure}[!htpb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figuras/parte2_c.png}
 \caption{Sinal rebatido no tempo.}\label{fig:p2c}
@@ -244,7 +245,7 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 
 \subsection*{a) Equação $x[n]$ com impulsos deslocados}
 \lstinputlisting[language=Matlab, caption={{Equação de x(n).}}]{codigos/parte3_a.m}
-\begin{figure}[!htpb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figuras/parte3_a.png}
 \caption{Composição da função x[n] por funções impulso.}\label{fig:p3a}
@@ -252,7 +253,7 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 
 \subsection*{b) Equação $y[n]$ com impulsos deslocados}
 \lstinputlisting[language=Matlab, caption={{Equação de y(n).}}]{codigos/parte3_b.m}
-\begin{figure}[!htpb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figuras/parte3_b.png}
 \caption{Composição da função y[n] por funções impulso.}\label{fig:p3b}
@@ -262,7 +263,7 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 
 \subsection*{a) Sequência $\cos(0,1n - \pi)$ na restrição $[-20, 20]$}
 \lstinputlisting[language=Matlab, caption={{Cossenoide, item a).}}]{codigos/parte4_a.m}
-\begin{figure}[!htpb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figuras/parte4_a.png}
 \caption{Cossenoide a).}\label{fig:p4a}
@@ -270,7 +271,7 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 
 \subsection*{b) Sequência $\cos(0,1n - \pi)$ na restrição $[-10, 20]$}
 \lstinputlisting[language=Matlab, caption={{Cossenoide, item b).}}]{codigos/parte4_b.m}
-\begin{figure}[!htpb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figuras/parte4_b.png}
 \caption{Cossenoide b).}\label{fig:p4b}
