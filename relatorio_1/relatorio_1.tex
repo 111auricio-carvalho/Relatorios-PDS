@@ -26,7 +26,7 @@
     \count1=0
     \@whilenum \count1<\@advisor \do{%
     \ifcase\count1 % same as \ifnum0=\count1
-        \local@advisorstring: \csname uftAdvisorDegree:\the\count1 \endcsname \ 
+        Professor: \csname uftAdvisorDegree:\the\count1 \endcsname \ 
         \csname uftAdvisorName:\the\count1 \endcsname \ 
         \csname uftAdvisorSurname:\the\count1 \endcsname \ \par
     \else
@@ -124,9 +124,28 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 
 \chapter{Resultados e Discussões}
 
-\textit{[Insira aqui os gráficos gerados no Octave e a discussão dos resultados para cada parte do experimento.]}
+\textit{Os códigos foram implementados na linguagem Octave e estão apresentados a seguir, seguidos das análises dos gráficos obtidos.}
 
 \section{Resultados da Parte I}
+Para gerar os sinais fundamentais discretos solicitados no intervalo $-20 \leq n \leq 40$, implementou-se o seguinte código:
+
+\begin{lstlisting}[language=Matlab, caption={Geração dos Sinais Fundamentais Discretos da Parte I}]
+n = -20:40; 
+x_a = (n == 0);                        % Impulso
+x_b = (n >= 0);                        % Degrau
+x_c = n .* (n >= 0);                   % Rampa
+x_d = (0.80) .^ n;                     % Exponencial real
+x_e = 2 * cos(2 * pi * 0.3 * n + pi/3); % Senoidal
+x_f = (0.9 * exp(1j * pi / 10)) .^ n;  % Exponencial complexo
+
+% Componentes
+x_f_real = real(x_f);
+x_f_imag = imag(x_f);
+x_f_mag  = abs(x_f);
+x_f_fase = angle(x_f);
+\end{lstlisting}
+
+\textit{[Insira aqui as figuras dos gráficos gerados pelo Octave]}
 % Exemplo de como inserir imagem:
 % \begin{figure}[!htpb]
 % \centering
