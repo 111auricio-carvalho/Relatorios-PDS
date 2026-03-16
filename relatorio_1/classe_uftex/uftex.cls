@@ -145,6 +145,7 @@ xrightmargin=10pt
     }\\[2pt]%
   \vspace{0pt}%
   }%
+  \@afterindenttrue % Indenta o primeiro par\'agrafo ap\'os cap\'itulo (ABNT)
 }
 
 % Defining how is typeset the \chapter*
