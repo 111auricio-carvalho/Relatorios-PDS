@@ -10,23 +10,20 @@
 \usepackage{tikz}
 \usepackage[siunitx]{circuitikz}
 \usetikzlibrary{arrows}
-
-\usepackage[alf,abnt-emphasize=bf]{referencias_abnt/abntex2cite}
-\renewcommand{\backrefpagesname}{}
-\renewcommand{\backref}{}
-\renewcommand*{\backrefalt}[4]{}
-
-% ---- Configuração de cores para o código Octave/Matlab
 \usepackage{xcolor}
+
+% ---- Definição de cores para o código
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
+% ---- Configuração do listings para cores no Matlab/Octave
 \lstset{
+    language=Matlab,
     backgroundcolor=\color{backcolour},   
     commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
+    keywordstyle=\color{blue},
     numberstyle=\tiny\color{codegray},
     stringstyle=\color{codepurple},
     basicstyle=\ttfamily\small,
@@ -41,6 +38,11 @@
     showtabs=false,                  
     tabsize=2
 }
+
+\usepackage[alf,abnt-emphasize=bf]{referencias_abnt/abntex2cite}
+\renewcommand{\backrefpagesname}{}
+\renewcommand{\backref}{}
+\renewcommand*{\backrefalt}[4]{}
 
 % ---- Ajuste para transformar a capa de TCC em Relatório
 \makeatletter
@@ -112,16 +114,41 @@ Nesta prática, explorou-se a geração e plotagem de sinais discretos no tempo,
 
 \chapter{Metodologia e Procedimentos Práticos}
 
-De acordo com o roteiro do laboratório, foram realizadas a implementação, a plotagem e a análise dos sinais fundamentais e suas operações no Octave. Os procedimentos foram divididos em quatro partes principais:
+De acordo com o roteiro do laboratório, foram realizadas as seguintes atividades no Octave:
 
+\section{Parte I - Sinais Fundamentais Discretos}
+Foi solicitado gerar e plotar os seguintes sinais fundamentais discretos no tempo, na faixa de $-20 \leq n \leq 40$:
 \begin{itemize}
-    \item \textbf{Parte I:} Geração de sinais fundamentais (impulso, degrau, rampa, senoides e exponenciais).
-    \item \textbf{Parte II:} Operações aritméticas e deslocamento temporal de sequências.
-    \item \textbf{Parte III:} Representação de sequências complexas via translação de impulsos.
-    \item \textbf{Parte IV:} Investigação da periodicidade e análise de frequências discretas.
+    \item[] \textbf{a)} Função impulso unitário.
+    \item[] \textbf{b)} Função degrau unitário.
+    \item[] \textbf{c)} Função rampa.
+    \item[] \textbf{d)} Sinal exponencial real discreto $x_{1}[n] = (0,80)^{n}$.
+    \item[] \textbf{e)} Sinal senoidal discreto: $x_{2}[n] = 2\cos\left[2\pi(0,3)n + \frac{\pi}{3}\right]$.
+    \item[] \textbf{f)} Sinal exponencial complexo: $x_{3}[n] = (0,9e^{j\pi/10})^{n}$. Para este sinal, deve-se plotar a parte real, a parte imaginária, a magnitude e a fase.
 \end{itemize}
 
-O detalhamento de cada item, juntamente com os códigos-fonte e gráficos resultantes, encontra-se no capítulo seguinte.
+\section{Parte II - Operações com Sinais}
+Sejam os sinais $A[n] = \{-1,0, 1, 2, 3, 4, 4, 4, 4\}$ e $B[n] = \{1,1,1,1,0,-1,-1,-1,-1\}$. Foram calculados e plotados os seguintes sinais discretos:
+\begin{itemize}
+    \item[] \textbf{a)} $X_1[n] = 2A[n] - B[n]$
+    \item[] \textbf{b)} $X_2[n] = A[n] + 3B[n]$
+    \item[] \textbf{c)} $X_3[n] = X_2[-n]$
+\end{itemize}
+
+\section{Parte III - Plotagem de Sequências}
+Também foi necessário plotar as seguintes sequências:
+\begin{itemize}
+    \item[] \textbf{a)} $x[n] = 3\delta(n + 2) - 0,5\delta(n) + 5\delta(n - 1) - 4\delta(n - 5)$
+    \item[] \textbf{b)} $y[n] = \delta(n + 1) - 2\delta(n - 1) + 5\delta(n - 4)$
+\end{itemize}
+
+\section{Parte IV - Periodicidade de Sequências}
+Gerou-se e plotou-se as sequências:
+\begin{itemize}
+    \item[] \textbf{a)} $\cos[0,1n - \pi]$, para $-20 \leq n \leq 20$
+    \item[] \textbf{b)} $\cos[0,1n - \pi]$, para $-10 \leq n \leq 20$
+\end{itemize}
+Além disso, verificou-se analiticamente se as referidas sequências são periódicas e qual o seu período fundamental.
 
 \chapter{Resultados e Discussões}
 
