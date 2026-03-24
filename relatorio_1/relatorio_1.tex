@@ -125,7 +125,7 @@ Nesta prática, explorou-se a geração e plotagem de sinais discretos no tempo,
 
 \chapter{Metodologia e Procedimentos Práticos}
 
-De acordo com o roteiro do laboratório, foram realizadas as seguintes atividades no Octave (versão 11.1.0):
+De acordo com o roteiro do laboratório, foram realizadas as seguintes atividades no Octave (versão 11.1.0). Para a execução de diversas funções de processamento de sinais descritas, foi necessária a instalação sistemática do pacote \texttt{signal}. Conforme a documentação oficial\footnote{\url{https://gnu-octave.github.io/packages/signal/}}, a instalação é feita a partir da linha de comando do Octave executando \texttt{pkg install -forge signal}. Após a instalação, utiliza-se \texttt{pkg load signal} no início dos scripts locais, permitindo o uso de atalhos em Z-transform como \texttt{impz} para geração da resposta ao impulso de funções discretas fundamentais.
 
 \section{Parte I - Sinais Fundamentais Discretos}
 Foi solicitado gerar e plotar os seguintes sinais fundamentais discretos no tempo, na faixa de $-20 \leq n \leq 40$:
@@ -168,6 +168,8 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 \section{Resultados da Parte I}
 
 \subsection*{a) Função Impulso Unitário}
+A função impulso unitário discreto, $\delta[n]$, é definida como tendo valor 1 exatamente em $n = 0$ e 0 em qualquer outro instante. Através da função \texttt{impz}, foi calculada a resposta ao impulso do sistema identidade $H(z)=1$, referenciando perfeitamente a ocorrência da amostra unitária na origem.
+
 \lstinputlisting[language=Matlab, caption={{Gerador do impulso unitário.}}]{codigos/parte1_a.m}
 \begin{figure}[H]
 \centering
@@ -176,6 +178,8 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 \end{figure}
 
 \subsection*{b) Função Degrau Unitário}
+A função degrau unitário, $u[n]$, assume valor 1 para $n \geq 0$ e 0 para $n < 0$. Utilizando a função de transferência de um integrador $H(z) = \frac{1}{1 - z^{-1}}$, a resposta \texttt{impz} reproduz exatamente esse comportamento causal, gerando todos os valores amostrais subsequentes fixados intermitentemente em 1.
+
 \lstinputlisting[language=Matlab, caption={{Gerador do degrau unitário.}}]{codigos/parte1_b.m}
 \begin{figure}[H]
 \centering
@@ -184,6 +188,8 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 \end{figure}
 
 \subsection*{c) Função Rampa}
+A função rampa, $r[n] = n \cdot u[n]$, exibe um crescimento linear contínuo partindo do zero. A função gerada via transferência $H(z) = \frac{z^{-1}}{1 - 2z^{-1} + z^{-2}}$ reflete com clareza essa progressão amostral diretamente proporcional ao avanço do tempo discreto $n$ nos instantes de tempo positivos.
+
 \lstinputlisting[language=Matlab, caption={{Gerador da rampa.}}]{codigos/parte1_c.m}
 \begin{figure}[H]
 \centering
@@ -192,6 +198,8 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 \end{figure}
 
 \subsection*{d) Sinal Exponencial Real Discreto}
+Diferentemente de uma análise puramente matemática em que a expressão $(0,8)^n$ assumiria valores imensos (tendendo ao infinito) para índices de $n$ muito negativos, o sinal representado corresponde à forma \textbf{causal} de um sistema LTI em Processamento Digital de Sinais (PDS), dada formalmente por $x_1[n] = (0,8)^n \cdot u[n]$. Essa adaptação causal é intrínseca à matemática providenciada pela função \texttt{impz} (implementada pelo pacote \texttt{signal} do Octave), que calcula a resposta ao impulso para instantes causais ($n \ge 0$). Assim, o sinal possui um ponto de partida unitário na origem ($n = 0$), seguindo para um natural decaimento amortecido em tempos positivos, não explodindo para as amostras passadas.
+
 \lstinputlisting[language=Matlab, caption={{Gerador da exponencial real.}}]{codigos/parte1_d.m}
 \begin{figure}[H]
 \centering
@@ -200,6 +208,8 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 \end{figure}
 
 \subsection*{e) Sinal Senoidal Discreto}
+A sequência foi modelada através da equação explícita no domínio do tempo discreto $x_2[n] = 2\cos\left[2\pi(0,3)n + \frac{\pi}{3}\right]$. O gráfico revelando amostras discretas do ciclo aponta a natureza oscilatória natural da cossenoide digital, demonstrando a constância e repetição compatíveis com a representação discreta sem atenuação contínua.
+
 \lstinputlisting[language=Matlab, caption={{Gerador do senoidal.}}]{codigos/parte1_e.m}
 \begin{figure}[H]
 \centering
@@ -208,6 +218,8 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 \end{figure}
 
 \subsection*{f) Sinal Exponencial Complexo}
+A progressão descrita por $x_3[n] = (0,9e^{j\pi/10})^{n}$ insere a conjunção de uma oscilação puramente polar com uma curva de atenuação logarítmica do raio. Ao separarmos a parte real e imaginária do vetor resultante, os seus gráficos expõem nitidamente formas de onda puramente senoidais imersas num contorno de declínio real dado por conta da base limitante equivalente do círculo unitário de $(0,9^n)$.
+
 \lstinputlisting[language=Matlab, caption={{Gerador da exponencial complexa e seus componentes.}}]{codigos/parte1_f.m}
 \begin{figure}[H]
 \centering
@@ -218,6 +230,8 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 \section{Resultados da Parte II}
 
 \subsection*{a) $X_1[n] = 2A[n] - B[n]$}
+A operação realizada ilustra uma combinação linear amostra por amostra (operações de vetor ponto a ponto). O sinal final $X_1[n]$ é obtido amplificando-se a sequência $A[n]$ por um ganho de 2 e, em seguida, subtraindo-se o arranjo $B[n]$.
+
 \lstinputlisting[language=Matlab, caption={{Operação X1.}}]{codigos/parte2_a.m}
 \begin{figure}[H]
 \centering
@@ -226,6 +240,8 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 \end{figure}
 
 \subsection*{b) $X_2[n] = A[n] + 3B[n]$}
+Similarmente ao item anterior, promove-se o processamento escalar discreto através de uma adição vetorizada onde a sequência $B[n]$ sofre previamente uma amplificação por um fator de 3 para então ser somada de forma correspondente à sequência $A[n]$.
+
 \lstinputlisting[language=Matlab, caption={{Operação X2.}}]{codigos/parte2_b.m}
 \begin{figure}[H]
 \centering
@@ -234,6 +250,8 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 \end{figure}
 
 \subsection*{c) $X_3[n] = X_2[-n]$}
+Este gráfico comprova o efeito visual da operação de \textbf{rebatimento} (ou reflexão) no domínio do tempo discreto. O vetor $X_2[n]$ tem sua janela invertida em relação ao eixo de ordenadas (o instante $n$ torna-se $-n$), produzindo um espelhamento reverso perfeito do sinal.
+
 \lstinputlisting[language=Matlab, caption={{Operação X3 com rebatimento temporal.}}]{codigos/parte2_c.m}
 \begin{figure}[H]
 \centering
@@ -244,6 +262,8 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 \section{Resultados da Parte III}
 
 \subsection*{a) Equação $x[n]$ com impulsos deslocados}
+O traçado evidencia a capacidade de modelagem por sobreposição; a sequência $x[n]$ não é nada além da superposição linear de funções impulsos unitários isolados transladados para os tempos indicados nas suas chaves ($n = -2$, $n = 0$, $n = 1$ e $n = 5$) e parametrizados pelas amostras dos seus respectivos coeficientes algébricos.
+
 \lstinputlisting[language=Matlab, caption={{Equação de x(n).}}]{codigos/parte3_a.m}
 \begin{figure}[H]
 \centering
@@ -252,6 +272,8 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 \end{figure}
 
 \subsection*{b) Equação $y[n]$ com impulsos deslocados}
+Apoiando a mesma formulação sistemática de somatório pontual de instantes únicos, a sequência $y[n]$ foi traçada identificando e escalando picos localizados estritamente nos três instantes de disparos exigidos em formato aditivo ($n = -1$, $n = 1$ e $n = 4$).
+
 \lstinputlisting[language=Matlab, caption={{Equação de y(n).}}]{codigos/parte3_b.m}
 \begin{figure}[H]
 \centering
@@ -262,6 +284,8 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 \section{Resultados da Parte IV}
 
 \subsection*{a) Sequência $\cos(0,1n - \pi)$ na restrição $[-20, 20]$}
+Traçado sob uma simetria em torno do eixo vertical, este contorno senoidal tenta demonstrar uma periodicidade oscilatória dentro do intervalo de amostras. A percepção geométrica engana sugerindo um contínuo repetitivo, porém uma inspeção atenta sobre a posição dos pontos das amostras indica discretamente a quebra da integralidade do ciclo fundamental nas extremidades da sua fase.
+
 \lstinputlisting[language=Matlab, caption={{Cossenoide, item a).}}]{codigos/parte4_a.m}
 \begin{figure}[H]
 \centering
@@ -270,6 +294,8 @@ Além disso, verificou-se analiticamente se as referidas sequências são perió
 \end{figure}
 
 \subsection*{b) Sequência $\cos(0,1n - \pi)$ na restrição $[-10, 20]$}
+Aferida numa restrição assimétrica, esta janela corta parte dos valores temporais do histórico inicial. A falta de alinhamento harmônico exato entre as repetições (confirmada matematicamente na subseção da análise a seguir) elucida a natureza não-periódica rigorosa desse sinal temporal discreto, dado que sua variação não contempla um intervalo natural fechado sobre ciclos de $2\pi$.
+
 \lstinputlisting[language=Matlab, caption={{Cossenoide, item b).}}]{codigos/parte4_b.m}
 \begin{figure}[H]
 \centering
