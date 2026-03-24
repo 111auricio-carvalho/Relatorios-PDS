@@ -53,8 +53,20 @@
 \renewcommand{\backref}{}
 \renewcommand*{\backrefalt}[4]{}
 
-% ---- Ajuste para transformar a capa de TCC em Relatório
+% ---- Ajuste para transformar a capa de TCC em Relatório e numeração no rodapé
 \makeatletter
+\renewcommand*{\ps@plain}{%
+  \let\@mkboth\@gobbletwo
+  \let\@oddhead\@empty
+  \def\@oddfoot{%
+    \reset@font
+    \hfil
+    \thepage
+  }%
+  \let\@evenhead\@empty
+  \let\@evenfoot\@oddfoot
+}
+
 \renewcommand\frontpage@maintext{
   \sloppy\nohyphens{Relatório de Laboratório apresentado à disciplina de Processamento Digital de Sinais do curso de \local@deptname\ da \local@universityname .
 
