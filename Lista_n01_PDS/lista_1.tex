@@ -15,6 +15,7 @@
 \usepackage{xcolor}
 \usepackage{mathptmx} % Times New Roman (ABNT)
 \usepackage{float}
+\usepackage{amsmath, amssymb}
 
 \renewcommand{\lstlistingname}{Código}
 \renewcommand{\lstlistlistingname}{Lista de Códigos}
@@ -190,7 +191,31 @@ Para um sinal discreto ser periódico, a relação $\frac{\Omega_0}{2\pi}$ deve 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{figuras/figura1.png}
+\begin{tikzpicture}[scale=0.45]
+    % Eixos
+    \draw[->] (-12.5, 0) -- (23.5, 0) node[right] {$n$};
+    \draw[->] (0, -0.5) -- (0, 2) node[above] {$x[n]$};
+    
+    % Ticks e referencias
+    \foreach \x in {-10, -5, 0, 5, 10, 15, 20}
+        \draw (\x, 0.1) -- (\x, -0.1) node[below=4pt] {\small $\x$};
+        
+    \draw (0.1, 1) -- (-0.1, 1) node[left] {\small 1};
+    
+    % Zeros (amostras com valor 0)
+    \foreach \x in {-12, -8, -7, -4, -3, -2, 2, 3, 6, 7, 8, 12, 13, 16, 17, 18, 22} {
+        \draw[blue, fill=white] (\x, 0) circle (2pt);
+    }
+    
+    % Uns (amostras com valor 1)
+    \foreach \x in {-11, -10, -9, -6, -5, -1, 0, 1, 4, 5, 9, 10, 11, 14, 15, 19, 20, 21} {
+        \draw[blue] (\x, 0) -- (\x, 1);
+        \draw[blue, fill=white] (\x, 1) circle (2pt);
+    }
+    
+    \node[blue] at (-13.5, 0) {\dots};
+    \node[blue] at (24.5, 0) {\dots};
+\end{tikzpicture}
 \caption{Sinal descrito no item h).}\label{fig:f1}
 \end{figure}
 
