@@ -142,7 +142,7 @@ O desafio desta prática consistiu em modelar manualmente a geração das funç�
 \chapter{Metodologia e Procedimentos Práticos}
 
 \section{Parte I - Implementação Manual de Funções}
-A principal exigência técnica desta prática de laboratório solicitou o não uso dos algoritmos padronizados. Criou-se customizadamente as funções essenciais que operam atreladas a um vetor temporal com limite inferior e superior explícitos ($n1 \le n \le n2$).
+Criou-se customizadamente as funções essenciais que operam atreladas a um vetor temporal com limite inferior e superior explícitos ($n1 \le n \le n2$).
 
 As funções criadas e suas assinaturas foram organizadas em arquivos independentes:
 \begin{itemize}
@@ -153,9 +153,8 @@ As funções criadas e suas assinaturas foram organizadas em arquivos independen
     \item[\textbf{e)}] \texttt{shift\_sinais}: Promove o deslocamento vetorial temporal mapeando os valores frente a um coeficiente $n_0$.
 \end{itemize}
 
-O desenvolvimento algorítmico e criativo destas lógicas fundamentou todo o arsenal de operações e equações pedidas nas seções posteriores.
 
-\section{Parte II - Geração e Plotagem com Domínio Induzido}
+\section{Parte II - Geração e Plotagem com Intervalo Sinalizado}
 Utilizando as novas instâncias procedurais da \emph{Parte I}, foram montadas as formulações relativas aos sinais:
 \begin{enumerate}
     \item[\textbf{a)}] $x[n] = 2\delta[n + 2] - \delta[n - 4], -10 \leq n \leq 10$
@@ -169,7 +168,7 @@ Dada a sequência declarativa inicial $x[n] = \{1,2,3,4,5,6,7,6,5,4,3,2,1\}$, as
     \item[\textbf{b)}] $x_2[n] = x[2 - n] + x[n]x[n + 2]$
 \end{enumerate}
 
-Note-se a importância da abordagem reflexiva temporal de indexação invertida que se faz presente pela presença do termo condicional rebatido em amplitude $x[2-n]$.
+Nota-se a importância da abordagem reflexiva temporal de indexação invertida que se faz presente pela presença do termo condicional rebatido em amplitude $x[2-n]$.
 
 \section{Parte IV - Sinal Complexo Exponencial Expandido}
 Ao final da demanda laboratorial, gerou-se o sinal discreto de natureza complexa modelado por uma parte resistiva/atenuadora e uma reativa/oscilatória aglutinadas num mesmo argumento polar:
@@ -201,8 +200,9 @@ E por fim, \texttt{shift\_sinais(x, n, n0)} desloca as instâncias atrasando ou 
 
 \section{Parte II: Utilização Plena na Base de Tempos}
 
+\lstinputlisting[language=Matlab, caption={{Composição 2a e 2b.}}]{codigos/parte2.m}
+
 \subsection*{a) Função em Delta Duplo}
-\lstinputlisting[language=Matlab, caption={{Composição 2a.}}]{codigos/parte2.m}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figuras/parte2_a.png}
@@ -247,14 +247,14 @@ Para decompor as propriedades do eixo do número quociente polar \texttt{x = exp
 
 \chapter{Conclusão}
 
-As práticas efetuadas validaram com louvor a compreensão profunda das funções de Processamento Digital de Sinais (PDS). A utilização do Octave \cite{octaveman} e a consulta à documentação oficial \cite{matlabdoc} provaram ser ferramentas essenciais para a verificação prática dos conceitos teóricos discutidos em aula e apresentados na literatura técnica consagrada de Proakis \cite{proakis_manolakis} e Oppenheim \cite{oppenheim_willsky}.
+As práticas efetuadas validaram a compreensão profunda das funções de Processamento Digital de Sinais (PDS). A utilização do Octave \cite{octaveman} e a consulta à documentação oficial \cite{matlabdoc} provaram ser ferramentas essenciais para a verificação prática dos conceitos teóricos discutidos em aula e apresentados na literatura técnica consagrada de Proakis \cite{proakis_manolakis} e Oppenheim \cite{oppenheim_willsky}.
 
-As funções escritas manualmente responderam favoravelmente suportando \textit{overlaps} e espaços vazios com atribuição de zeros sem corromper as integridades originais das funções sobre as quais as propriedades comutativas e vetoriais foram executadas. Ademais, as reflexões do plano cartesiano em conjunção da análise tridimensional do número complexo forneceram visualizações riquíssimas para a correlação do campo de fase e de decaimento real. Conclui-se que o domínio da geração e caracterização destes sinais elementares é um passo indispensável para o estudo de sistemas lineares invariantes no tempo (LIT) e transformadas de frequência que serão abordadas nos próximos módulos da disciplina.
+As funções escritas manualmente responderam favoravelmente suportando \textit{overlaps} e espaços vazios com atribuição de zeros sem corromper as integridades originais das funções sobre as quais as propriedades comutativas e vetoriais foram executadas. Ademais, as reflexões do plano cartesiano em conjunção da análise tridimensional do número complexo forneceram visualizações riquíssimas para a correlação do campo de fase e de decaimento real. Conclui-se que o domínio da geração e caracterização destes sinais elementares é um passo indispensável para o estudo de sistemas lineares invariantes no tempo (LIT) e transformadas de frequência.
 
 % ----------------------------------------------------------------------------------------------------- %
 \backmatter 
 \singlespacing   
-% ----------------------------------------------------------------------------------------------------- %
+% ----------------------------------------------------------------------------------------------------- %%%
 \bibliography{relatorio_2}
 
 \end{document}

@@ -12,7 +12,7 @@ title('Parte Real'); xlabel('n'); grid on;
 
 subplot(2,2,2);
 stem(n, imag(x), 'filled', 'r');
-title('Parte Imaginária'); xlabel('n'); grid on;
+title('Parte Imaginaria'); xlabel('n'); grid on;
 
 subplot(2,2,3);
 stem(n, abs(x), 'filled', 'k');
