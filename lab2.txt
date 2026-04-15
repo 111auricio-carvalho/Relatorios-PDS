@@ -1,0 +1,30 @@
+  
+ 
+Laboratório PDS 02 
+Disciplina: Processamento Digital de Sinais 
+Professor: Ivan Ney Alvizuri Romani 
+Tema: Operações com Sequências 
+I – Use o comando function do octave para criar as seguintes funções de 
+sequências discretas: 
+a) seq_imp (função impulso) 
+b) seq_degrau (função degrau) 
+c) soma_sinais (função soma de duas sequências) 
+d) mult_sinais (função multiplicação de duas sequências) 
+e) shift_sinais (função deslocamento de sequências) 
+II – Gere e plote as seguintes sequências no intervalo sinalizado. 
+a) 푥[푛] = 2훿[푛 + 2] − 훿[푛 − 4], - 10 ≤ n ≤ 10 
+b) 푥[푛] = 푛[푢(푛) − 푢(푛 − 10)] + [푢(푛 − 10) − 푢(푛 − 20)]10푒−0.3(푛−10) , 0 ≤ n 
+≤ 40 
+III – Para x[n] = {1,2,3,4,5,6,7,6,5,4,3,2,1}. Determine e plote as seguintes 
+sequências: 
+a) x1[n] = 0,5x[n - 3] – 2x[n + 2] 
+b) x2[n] = x[2 – n] + x[n]x[n + 2] 
+IV – Gere o sinal complexo: 
+푥[푛] = 푒(−0,2+푗0,3)푛 , -25 ≤ n ≤ 25 
+e plote a sua magnitude, fase, a parte real e a parte imaginaria. Use o comando 
+subplot. 
+Observações: 
+- Os relatórios serão redigidos digitalmente na forma de um relatório acadêmico. 
+- Enviar o relatório ao AVA no formato PDF. 
+Data limite de Entrega: 15/04/2026 até meia noite. 
+Palmas – Outono 2026 
