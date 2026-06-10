@@ -1,0 +1,451 @@
+% ----------------------------------------------------------------------------------------------------- %
+% Relatório 4 de PDS - Baseado na classe UFTeX
+% ----------------------------------------------------------------------------------------------------- %
+
+\documentclass[tcc]{classe_uftex/uftex}
+% ---- Esse comando cria o nome uftex estilizado
+\newcommand\uftex{UF\TeX}
+
+\usepackage{lipsum}
+\usepackage{tikz}
+\usepackage[siunitx]{circuitikz}
+\usetikzlibrary{arrows}
+
+\usepackage[alf,abnt-emphasize=bf]{referencias_abnt/abntex2cite}
+\usepackage{xcolor}
+\usepackage{mathptmx} % Times New Roman (ABNT)
+\usepackage{float}
+
+\renewcommand{\lstlistingname}{Código}
+\renewcommand{\lstlistlistingname}{Lista de Códigos}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.98,0.98,0.98}
+\definecolor{codeblue}{rgb}{0,0,0.8}
+
+\lstset{
+  language=Matlab,
+  backgroundcolor=\color{backcolour},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{codeblue}\bfseries,
+  numberstyle=\normalsize\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\small\color{black},
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=12pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2,
+  frame=lines,
+  rulecolor=\color{black!30},
+  xleftmargin=20pt,
+  framexleftmargin=5pt,
+  aboveskip=20pt,
+  belowskip=20pt
+}
+
+\renewcommand{\backrefpagesname}{}
+\renewcommand{\backref}{}
+\renewcommand*{\backrefalt}[4]{}
+
+% ---- Ajuste para transformar a capa de TCC em Relatório e numeração no rodapé
+\makeatletter
+\renewcommand*{\ps@plain}{%
+  \let\@mkboth\@gobbletwo
+  \let\@oddhead\@empty
+  \def\@oddfoot{%
+    \reset@font
+    \hfil
+    \thepage
+  }%
+  \let\@evenhead\@empty
+  \let\@evenfoot\@oddfoot
+}
+
+\renewcommand\frontpage@maintext{
+  \sloppy\nohyphens{Relatório de Laboratório apresentado à disciplina de Processamento Digital de Sinais do curso de \local@deptname\ da \local@universityname .
+
+ \vspace{.5cm}
+  \nohyphens{%
+    \count1=0
+    \@whilenum \count1<\@advisor \do{%
+    \ifcase\count1 % same as \ifnum0=\count1
+        Professor: \csname uftAdvisorDegree:\the\count1 \endcsname \
+        \csname uftAdvisorName:\the\count1 \endcsname \
+        \csname uftAdvisorSurname:\the\count1 \endcsname \ \par
+    \else
+        \local@coadvisorstring: \csname uftAdvisorDegree:\the\count1 \endcsname \
+        \csname uftAdvisorName:\the\count1 \endcsname \
+        \csname uftAdvisorSurname:\the\count1 \endcsname \ \par
+    \fi
+    \advance\count1 by 1}
+  } \par
+}
+}
+\makeatother
+
+% ---- Início do documento
+\begin{document}
+  % ---- Descrição do título do trabalho
+  \title{Relatório 4 de PDS: Transformada de Fourier em Tempo Discreto}
+  % ---- Nome do autor ou autores do trabalho
+  \author{Maurício}{Moura de Carvalho}
+  % ---- Nome do orientador do trabalho.
+  \advisor{Prof.}{Ivan}{Ney Alvizuri Romani}{Dr.}
+
+  % ---- Departamento
+  \department{EE}
+
+  % ---- Data
+  \date{08}{06}{2026}
+
+  % ---- Palavras-chaves
+  \keyword{Processamento Digital de Sinais}
+  \keyword{Transformada de Fourier em Tempo Discreto}
+  \keyword{Octave}
+
+  % ---- Palavras-chaves em inglês
+  \foreignkeyword{Digital Signal Processing}
+  \foreignkeyword{Discrete-Time Fourier Transform}
+  \foreignkeyword{Octave}
+
+  \maketitle
+  \frontmatter
+
+  % ---- Cria o sumário
+  \tableofcontents
+
+  % --- Marca o inicio dos elementos textuais
+  \mainmatter
+  \setcounter{page}{1}
+  \onehalfspacing
+
+% ----------------------------------------------------------------------------------------------------- %
+% Capítulos do trabalho
+% ----------------------------------------------------------------------------------------------------- %
+
+\chapter{Introdução}
+
+Este relatório apresenta os resultados do quarto laboratório da disciplina de Processamento Digital de Sinais (PDS), dedicado ao tema da \textbf{Transformada de Fourier em Tempo Discreto (TFTD)}. A TFTD é uma ferramenta central na análise de sistemas e sinais discretos, pois permite representar qualquer sequência no domínio da frequência, revelando seu conteúdo espectral de forma precisa.
+
+Ao contrário da Transformada Discreta de Fourier (DFT), a TFTD opera sobre sequências de duração finita ou infinita e produz um espectro contínuo e periódico em frequência com período $2\pi$. Esta periodicidade é uma consequência direta da natureza discreta das amostras e constitui uma das propriedades mais importantes do domínio da frequência em tempo discreto.
+
+O objetivo desta prática foi calcular analiticamente e verificar numericamente a TFTD de diferentes sinais, investigar a periodicidade do espectro e verificar graficamente a propriedade de deslocamento em frequência. As implementações foram realizadas no ambiente Octave \cite{octaveman}, seguindo o roteiro de laboratório \cite{roteiro04} e com suporte nas referências de Proakis e Manolakis \cite{proakis_manolakis} e Ingle \cite{ingle2017}.
+
+\chapter{Metodologia e Procedimentos Práticos}
+
+\section{Parte I -- TFTD de $x[n] = (0{,}5)^n u[n]$}
+
+A TFTD de uma sequência $x[n]$ é definida como:
+\begin{equation}
+  X(e^{j\omega}) = \sum_{n=-\infty}^{+\infty} x[n]\, e^{-j\omega n}
+  \label{eq:tftd_def}
+\end{equation}
+
+Para $x[n] = (0{,}5)^n u[n]$, a soma começa em $n=0$ e a série geométrica converge pois $|0{,}5| < 1$:
+\begin{equation}
+  X(e^{j\omega}) = \sum_{n=0}^{\infty} (0{,}5)^n e^{-j\omega n}
+  = \sum_{n=0}^{\infty} \left(0{,}5\, e^{-j\omega}\right)^n
+  = \frac{1}{1 - 0{,}5\, e^{-j\omega}}
+  \label{eq:tftd_parte1}
+\end{equation}
+
+A expressão em forma fechada \eqref{eq:tftd_parte1} foi avaliada numericamente em 501 pontos equidistantes no intervalo $[0, \pi]$, e foram plotadas a magnitude $|X(e^{j\omega})|$, o ângulo $\angle X(e^{j\omega})$, a parte real e a parte imaginária.
+
+\section{Parte II -- TFTD de $x[n] = \{1, 2, 3, 4, 5\}$}
+
+Para a sequência finita $x[n] = \{1, 2, 3, 4, 5\}$ definida para $0 \leq n \leq 4$, a TFTD é uma soma finita:
+\begin{equation}
+  X(e^{j\omega}) = \sum_{n=0}^{4} x[n]\, e^{-j\omega n}
+  = 1 + 2e^{-j\omega} + 3e^{-j2\omega} + 4e^{-j3\omega} + 5e^{-j4\omega}
+  \label{eq:tftd_parte2}
+\end{equation}
+
+A avaliação numérica foi feita em 501 frequências equidistantes entre $[0, \pi]$, com plotagem das quatro representações espectrais.
+
+\section{Parte III -- TFTD de $x[n] = (0{,}9\,e^{j\pi/3})^n$, $0 \leq n \leq 10$}
+
+A sequência complexa $x[n] = (0{,}9\,e^{j\pi/3})^n = (0{,}9)^n e^{j\frac{\pi}{3}n}$ tem suporte finito $0 \leq n \leq 10$. Sua TFTD é:
+\begin{equation}
+  X(e^{j\omega}) = \sum_{n=0}^{10} (0{,}9)^n e^{j\frac{\pi}{3}n}\, e^{-j\omega n}
+  = \sum_{n=0}^{10} (0{,}9)^n\, e^{j\left(\frac{\pi}{3} - \omega\right)n}
+  \label{eq:tftd_parte3}
+\end{equation}
+
+O espectro foi avaliado no intervalo $[-2\pi, 2\pi]$ para evidenciar a \textbf{periodicidade} de $2\pi$ da TFTD, propriedade universal decorrente do caráter discreto das amostras: $X(e^{j(\omega + 2\pi k)}) = X(e^{j\omega})$ para qualquer inteiro $k$.
+
+\section{Parte IV -- Propriedade de Deslocamento em Frequência}
+
+A propriedade de deslocamento em frequência da TFTD afirma que, se $Y(e^{j\omega})$ é a TFTD de $y[n] = e^{j\omega_0 n} x[n]$, então:
+\begin{equation}
+  Y(e^{j\omega}) = X(e^{j(\omega - \omega_0)})
+  \label{eq:freq_shift}
+\end{equation}
+
+Para verificar essa propriedade, utilizaram-se:
+\begin{itemize}
+  \item $x[n] = \cos\!\left(\frac{\pi n}{2}\right)$, $0 \leq n \leq 10$
+  \item $y[n] = e^{j\frac{\pi}{4}n}\, x[n]$, com $\omega_0 = \pi/4$
+\end{itemize}
+Segundo a propriedade \eqref{eq:freq_shift}, espera-se que o espectro de $y[n]$ seja o espectro de $x[n]$ deslocado de $\pi/4$ em direção a frequências mais altas. Ambas as TFTDs foram calculadas numericamente em 1001 pontos no intervalo $[-\pi, \pi]$ e comparadas graficamente.
+
+\chapter{Resultados e Discussões}
+
+\section{Parte I: Sinal Exponencial Real de Duração Infinita}
+
+A forma fechada $X(e^{j\omega}) = 1/(1 - 0{,}5\,e^{-j\omega})$ foi avaliada diretamente, aproveitando que a expressão analítica é conhecida. O Código~1 implementa o cálculo e gera os quatro gráficos.
+
+\lstinputlisting[language=Matlab, caption={{Script para a Parte I.}}]{codigos/parte1.m}
+
+\noindent A seguir, explica-se cada linha do Código~1:
+
+\begin{description}
+  \item[Linhas 1--2:] Comentários que descrevem o propósito do script e recordam a forma fechada da TFTD obtida analiticamente. São ignorados pelo interpretador, servindo apenas como documentação.
+
+  \item[Linha 4 --- \texttt{w = linspace(0, pi, 501)}:] Cria um vetor linha \texttt{w} com 501 valores igualmente espaçados entre $0$ e $\pi$, que representam as frequências digitais $\omega$ no intervalo pedido pelo roteiro. O número 501 garante resolução suficiente para visualizar as variações espectrais.
+
+  \item[Linha 5 --- \texttt{X = 1 ./ (1 - 0.5 * exp(-1j * w))}:] Avalia a TFTD em forma fechada para todos os 501 pontos simultaneamente. O operador \texttt{.*} e \texttt{./} (ponto-barra) indicam operações \emph{elemento a elemento} sobre o vetor \texttt{w}. O valor \texttt{-1j} é a unidade imaginária $-j$ do Octave, de modo que \texttt{exp(-1j * w)} computa $e^{-j\omega}$ para cada $\omega \in$ \texttt{w}.
+
+  \item[Linha 7 --- \texttt{figure('Position', [100 100 800 600])}:] Abre uma nova janela gráfica e define sua posição e dimensões em pixels na tela (x=100, y=100, largura=800, altura=600).
+
+  \item[Linha 9 --- \texttt{subplot(2,2,1)}:] Divide a figura em uma grade de 2 linhas por 2 colunas e ativa o primeiro painel (linha superior esquerda). Os comandos seguintes se aplicam a este painel.
+
+  \item[Linha 10 --- \texttt{plot(w/pi, abs(X), 'b', 'LineWidth', 1.5)}:] Traça a \textbf{magnitude} $|X(e^{j\omega})|$ no eixo vertical contra a frequência normalizada $\omega/\pi$ no eixo horizontal. A normalização por $\pi$ faz com que o eixo vá de 0 a 1, forma convencional em PDS. O argumento \texttt{'b'} define a cor azul e \texttt{'LineWidth', 1.5} aumenta a espessura da linha para melhor legibilidade.
+
+  \item[Linha 11 --- \texttt{xlabel} e \texttt{ylabel}:] Atribuem rótulos aos eixos horizontal e vertical do painel, respectivamente, usando sintaxe \LaTeX\ para símbolos matemáticos (e.g., \texttt{\textbackslash omega} para $\omega$).
+
+  \item[Linha 12 --- \texttt{title('Magnitude')}:] Define o título exibido acima do painel.
+
+  \item[Linha 13 --- \texttt{grid on}:] Exibe linhas de grade no plano cartesiano do painel, facilitando a leitura de valores.
+
+  \item[Linhas 15--19:] Repetem a mesma lógica para o \textbf{segundo painel} (linha superior direita), desta vez plotando a \textbf{fase} $\angle X(e^{j\omega})$, extraída pela função \texttt{angle()}, que retorna o argumento do número complexo em radianos, no intervalo $(-\pi, \pi]$. A cor vermelha (\texttt{'r'}) diferencia visualmente este painel.
+
+  \item[Linhas 21--25:] Ativam o \textbf{terceiro painel} (linha inferior esquerda) e plotam a \textbf{parte real} $\text{Re}\{X(e^{j\omega})\}$ via função \texttt{real()}, em verde (\texttt{'g'}).
+
+  \item[Linhas 27--31:] Ativam o \textbf{quarto painel} (linha inferior direita) e plotam a \textbf{parte imaginária} $\text{Im}\{X(e^{j\omega})\}$ via função \texttt{imag()}, em magenta (\texttt{'m'}).
+
+  \item[Linha 33 --- \texttt{sgtitle(...)}:] Define um título global para a figura inteira (acima de todos os subplots), disponível a partir do Octave 6. Serve para identificar o contexto geral do gráfico.
+
+  \item[Linha 34 --- \texttt{print -dpng figuras/parte1.png}:] Salva a figura atual no disco em formato PNG, no caminho relativo \texttt{figuras/parte1.png}, para posterior inclusão no relatório.
+\end{description}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figuras/parte1.png}
+\caption{TFTD de $x[n]=(0{,}5)^n u[n]$: magnitude, fase, parte real e imaginária.}\label{fig:p1}
+\end{figure}
+
+\textbf{Magnitude.} O espectro $|X(e^{j\omega})|$ exibe comportamento de filtro passa-baixas: seu valor máximo ocorre em $\omega = 0$, onde $|X(e^{j0})| = 1/(1-0{,}5) = 2$, e seu valor mínimo em $\omega = \pi$, onde $|X(e^{j\pi})| = 1/(1+0{,}5) = 1/1{,}5 \approx 0{,}667$. A razão física é que, em $\omega = 0$, todas as amostras da sequência (que decaem positivamente) somam-se em fase; em $\omega = \pi$, os termos alternam de sinal e se cancelam parcialmente. A expressão exata é:
+\begin{equation}
+  |X(e^{j\omega})| = \frac{1}{\sqrt{(1-0{,}5\cos\omega)^2 + (0{,}5\sin\omega)^2}}
+  = \frac{1}{\sqrt{1{,}25 - \cos\omega}} \nonumber
+\end{equation}
+
+\textbf{Fase.} A fase é dada por $\angle X(e^{j\omega}) = -\arctan\!\left(\dfrac{0{,}5\sin\omega}{1-0{,}5\cos\omega}\right)$. Em $\omega = 0$ e $\omega = \pi$ a parte imaginária do denominador é nula, portanto $\angle X = 0$ em ambos os extremos. A fase atinge seu valor mais negativo nas proximidades de $\omega = \pi/2$, onde $\angle X \approx -\arctan(0{,}5) \approx -0{,}46\,\text{rad}$, e retorna a zero em $\omega = \pi$. O comportamento não é linear porque o sistema possui um polo em $z = 0{,}5$ (fase não linear é esperada para sistemas com polos não nulos).
+
+\textbf{Parte real.} $\text{Re}\{X(e^{j\omega})\} = (1-0{,}5\cos\omega)/(1{,}25 - \cos\omega)$. Como o numerador e denominador são ambos positivos para todo $\omega \in [0,\pi]$, a parte real é sempre positiva, decrescendo de $2$ em $\omega=0$ até $0{,}667$ em $\omega=\pi$. A parte real domina a magnitude neste caso, o que é condizente com a natureza real e positiva de $x[n]$.
+
+\textbf{Parte imaginária.} $\text{Im}\{X(e^{j\omega})\} = -0{,}5\sin\omega/(1{,}25 - \cos\omega)$. É identicamente zero em $\omega = 0$ e $\omega = \pi$ (onde $\sin\omega = 0$) e atinge seu valor mais negativo em torno de $\omega = \pi/2$: $\text{Im}\{X(e^{j\pi/2})\} = -0{,}5/1{,}25 = -0{,}4$. O sinal negativo decorre da causalidade do sistema: uma sequência que começa em $n=0$ e decai para $n>0$ concentra energia no semiplano imaginário negativo do espectro, resultado direto do sinal negativo de $e^{-j\omega n}$ na definição da TFTD.
+
+% ------------------------------------------------------------------ %
+\section{Parte II: Sequência Finita $\{1, 2, 3, 4, 5\}$}
+
+Por tratar-se de uma soma finita, a TFTD foi calculada diretamente pela definição \eqref{eq:tftd_parte2}, sem qualquer aproximação. O Código~2 implementa o cálculo iterando sobre cada ponto de frequência.
+
+\lstinputlisting[language=Matlab, caption={{Script para a Parte II.}}]{codigos/parte2.m}
+
+\noindent Explicação linha a linha do Código~2:
+
+\begin{description}
+  \item[Linhas 1--2:] Comentários descritivos do script.
+
+  \item[Linha 4 --- \texttt{x = [1 2 3 4 5]}:] Define o vetor linha com os coeficientes da sequência $x[n] = \{1, 2, 3, 4, 5\}$ para $n = 0, 1, 2, 3, 4$.
+
+  \item[Linha 5 --- \texttt{n = 0:4}:] Cria o vetor de índices de tempo $n = [0, 1, 2, 3, 4]$, correspondente ao suporte da sequência. É essencial manter \texttt{x} e \texttt{n} com o mesmo comprimento para que a multiplicação elemento a elemento funcione corretamente.
+
+  \item[Linha 6 --- \texttt{w = linspace(0, pi, 501)}:] Idêntico à Parte I: gera os 501 pontos de frequência equidistantes em $[0, \pi]$.
+
+  \item[Linha 8 --- \texttt{X = zeros(1, 501)}:] Pré-aloca o vetor resultado com zeros. Isso é uma prática recomendada em Octave/MATLAB pois evita o redimensionamento dinâmico do vetor a cada iteração do laço, tornando o código mais eficiente.
+
+  \item[Linha 9 --- \texttt{for k = 1:501}:] Inicia um laço que percorre todos os 501 índices de frequência. A variável \texttt{k} indexa tanto o vetor \texttt{w} quanto o vetor resultado \texttt{X}.
+
+  \item[Linha 10 --- \texttt{X(k) = sum(x .* exp(-1j * w(k) * n))}:] Calcula o $k$-ésimo ponto da TFTD pela definição direta: $X(e^{j\omega_k}) = \sum_{n=0}^{4} x[n]\,e^{-j\omega_k n}$. O produto \texttt{x .* exp(-1j * w(k) * n)} computa o produto elemento a elemento $x[n] \cdot e^{-j\omega_k n}$ para todo $n$ simultaneamente, e \texttt{sum()} soma esses produtos, realizando o somatório da TFTD em uma única instrução vetorial.
+
+  \item[Linha 11 --- \texttt{end}:] Encerra o bloco do laço \texttt{for}.
+
+  \item[Linhas 13--31:] Estrutura gráfica idêntica à Parte I: abre a figura, cria quatro subplots e plota magnitude, fase, parte real e parte imaginária de \texttt{X}.
+
+  \item[Linha 33 --- \texttt{sgtitle(...)}:] Título global com o nome da sequência.
+
+  \item[Linha 34 --- \texttt{print -dpng figuras/parte2.png}:] Exporta a figura para PNG.
+\end{description}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figuras/parte2.png}
+\caption{TFTD de $x[n]=\{1,2,3,4,5\}$: magnitude, fase, parte real e imaginária.}\label{fig:p2}
+\end{figure}
+
+\textbf{Magnitude.} O valor máximo da magnitude ocorre em $\omega = 0$, onde todos os termos da soma se somam construtivamente: $X(e^{j0}) = 1+2+3+4+5 = 15$. Em $\omega = \pi$, os termos alternam de sinal e a soma resulta em $X(e^{j\pi}) = 1-2+3-4+5 = 3$, que é o valor mínimo no intervalo. O espectro exibe lóbulos secundários de amplitude decrescente entre $\omega = 0$ e $\omega = \pi$, com zeros intermediários que dependem da estrutura polinomial da TFTD: $X(e^{j\omega}) = 1 + 2e^{-j\omega} + 3e^{-j2\omega} + 4e^{-j3\omega} + 5e^{-j4\omega}$, que é um polinômio de grau 4 em $e^{-j\omega}$.
+
+\textbf{Fase.} Como $x[n]$ é uma sequência \emph{real}, a TFTD satisfaz simetria conjugada: $X(e^{-j\omega}) = X^*(e^{j\omega})$. Isso implica que a magnitude é par e a fase é ímpar em $\omega$. No intervalo $[0, \pi]$, a fase é nula em $\omega = 0$ (onde $X$ é real e positiva, valendo 15) e em $\omega = \pi$ (onde $X$ é real e positiva, valendo 3). A fase não é linear porque a sequência $\{1,2,3,4,5\}$ não é \emph{simétrica} (palíndroma): se fosse do tipo $\{a,b,c,b,a\}$, a fase seria exatamente linear, característica de filtros FIR de fase linear. A assimetria dos coeficientes impõe variações não lineares na fase entre os dois extremos.
+
+\textbf{Parte real.} Como $x[n]$ é real, $\text{Re}\{X(e^{j\omega})\} = \sum_{n=0}^{4} x[n]\cos(\omega n)$ é uma função \emph{par} de $\omega$. Em $\omega = 0$ assume o valor 15 e vai oscilando, podendo ser negativa em certas frequências onde os cossenos ponderados pelos coeficientes crescentes resultam em soma negativa.
+
+\textbf{Parte imaginária.} Analogamente, $\text{Im}\{X(e^{j\omega})\} = -\sum_{n=0}^{4} x[n]\sin(\omega n)$ é \emph{ímpar} em $\omega$, portanto nula em $\omega=0$ e em $\omega=\pi$ (onde $\sin(\pi n) = 0$ para todo inteiro $n$). O fato de que a parte imaginária é não nula entre esses extremos é consequência direta da não-simetria da sequência: coeficientes assimétricos geram contribuições senoidais que não se cancelam.
+
+% ------------------------------------------------------------------ %
+\section{Parte III: Periodicidade da TFTD}
+
+O espectro foi calculado no intervalo estendido $[-2\pi, 2\pi]$ para evidenciar a periodicidade de $2\pi$.
+
+\lstinputlisting[language=Matlab, caption={{Script para a Parte III.}}]{codigos/parte3.m}
+
+\noindent Explicação linha a linha do Código~3:
+
+\begin{description}
+  \item[Linhas 1--2:] Comentários que identificam o script e o objetivo de investigar a periodicidade.
+
+  \item[Linha 4 --- \texttt{n = 0:10}:] Define o vetor de índices de tempo $n = 0, 1, \ldots, 10$, correspondente ao suporte da sequência.
+
+  \item[Linha 5 --- \texttt{x = (0.9 * exp(1j*pi/3)).{\textasciicircum}n}:] Computa a sequência $x[n] = (0{,}9 \cdot e^{j\pi/3})^n$ para todos os $n$ simultaneamente. O operador \texttt{.{\textasciicircum}} realiza a exponenciação elemento a elemento do vetor \texttt{n}. O valor \texttt{1j*pi/3} representa o ângulo $j\pi/3$ na forma polar, de modo que \texttt{0.9 * exp(1j*pi/3)} é o número complexo $0{,}9 e^{j\pi/3}$.
+
+  \item[Linha 8 --- \texttt{w = linspace(-2*pi, 2*pi, 2001)}:] Gera 2001 pontos de frequência no intervalo $[-2\pi, 2\pi]$, duas vezes mais largo que o usual, para revelar a repetição do espectro em múltiplos de $2\pi$.
+
+  \item[Linha 9 --- \texttt{X = zeros(1, 2001)}:] Pré-aloca o vetor resultado com 2001 posições, correspondentes à malha de frequências definida.
+
+  \item[Linhas 10--12:] Laço \texttt{for} que calcula a TFTD ponto a ponto pela definição, exatamente como na Parte II, mas agora para 2001 frequências e com a sequência complexa \texttt{x}.
+
+  \item[Linha 14 --- \texttt{figure('Position', [100 100 900 500])}:] Abre a janela gráfica com dimensões ligeiramente mais largas (900$\times$500 px) para acomodar bem os dois subplots empilhados verticalmente.
+
+  \item[Linha 16 --- \texttt{subplot(2,1,1)}:] Divide a figura em 2 linhas e 1 coluna e ativa o painel superior, onde será plotada a magnitude.
+
+  \item[Linha 17 --- \texttt{plot(w/pi, abs(X), 'b', 'LineWidth', 1.5)}:] Plota a magnitude do espectro em função de $\omega/\pi$, de modo que o eixo horizontal vai de $-2$ a $2$, evidenciando dois períodos completos do espectro.
+
+  \item[Linhas 18--19:] Rótulos dos eixos e título do painel superior.
+
+  \item[Linha 20 --- \texttt{xline(-1, '--k'); xline(0, '--k'); xline(1, '--k'); xline(2, '--k')}:] Traça linhas verticais tracejadas em $\omega/\pi = -1, 0, 1, 2$ (equivalentes a $\omega = -\pi, 0, \pi, 2\pi$). Essas linhas marcam as fronteiras de cada período e tornam visualmente imediata a periodicidade do espectro.
+
+  \item[Linha 21 --- \texttt{xticks(-2:0.5:2)}:] Define os valores exibidos no eixo horizontal com passo de $0{,}5$, de $-2$ a $2$, facilitando a leitura das posições dos picos espectrais.
+
+  \item[Linha 22 --- \texttt{grid on}:] Ativa a grade do painel.
+
+  \item[Linhas 24--30:] Repetem a lógica para o painel inferior, plotando desta vez a \textbf{fase} do espectro, com as mesmas linhas verticais e marcações de eixo, para confirmar que a periodicidade de $2\pi$ vale também para a informação de fase.
+
+  \item[Linha 32 --- \texttt{sgtitle(...)}:] Título global da figura.
+
+  \item[Linha 33 --- \texttt{print -dpng figuras/parte3.png}:] Exporta a figura.
+\end{description}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figuras/parte3.png}
+\caption{TFTD de $x[n]=(0{,}9\,e^{j\pi/3})^n$: periodicidade $2\pi$ da magnitude e da fase.}\label{fig:p3}
+\end{figure}
+
+\textbf{Periodicidade.} Os gráficos confirmam diretamente que $X(e^{j(\omega+2\pi)}) = X(e^{j\omega})$ para todo $\omega$. A prova matemática decorre da definição: substituindo $\omega + 2\pi$ na equação \eqref{eq:tftd_def} e usando o fato de que $e^{-j2\pi n} = 1$ para qualquer inteiro $n$,
+\begin{equation}
+  X\!\left(e^{j(\omega+2\pi)}\right) = \sum_{n=0}^{10} x[n]\,e^{-j(\omega+2\pi)n}
+  = \sum_{n=0}^{10} x[n]\,e^{-j\omega n}\underbrace{e^{-j2\pi n}}_{=\,1}
+  = X(e^{j\omega}) \nonumber
+\end{equation}
+As linhas verticais tracejadas em $\omega/\pi = -2, -1, 0, 1, 2$ delimitam os períodos e tornam visível a repetição idêntica do padrão.
+
+\textbf{Posição e forma do pico.} O pico de magnitude ocorre em $\omega = \pi/3$ ($\omega/\pi = 1/3 \approx 0{,}333$), exatamente na frequência angular da exponencial complexa $e^{j\pi n/3}$ embutida na sequência. Para uma sequência infinita $(0{,}9)^n e^{j\pi n/3} u[n]$, a TFTD seria $1/\bigl(1-0{,}9\,e^{j(\pi/3-\omega)}\bigr)$ — um pico infinitamente agudo (polo). Com apenas 11 amostras, o pico tem largura finita (alargamento espectral), pois a janela retangular de duração $N=11$ convolui o espectro com uma função do tipo $\text{Dirichlet}(N,\omega)$, introduzindo lóbulos laterais visíveis.
+
+\textbf{Ausência de simetria conjugada.} Como $x[n]$ é uma sequência \emph{complexa}, a TFTD \textbf{não} satisfaz simetria conjugada. Isso é evidente nos gráficos: o pico de magnitude aparece \emph{somente} em $\omega = \pi/3$, sem réplica em $\omega = -\pi/3$. Se $x[n]$ fosse real, o espectro seria par e haveriam picos simétricos em $\pm\pi/3$. A natureza complexa de $x[n]$ quebra essa simetria, sendo essa uma distinção fundamental entre sinais reais e complexos no domínio da frequência.
+
+\textbf{Fase.} O gráfico de fase confirma a mesma periodicidade de $2\pi$. A fase varia de forma não linear em torno do pico em $\omega = \pi/3$, apresentando transições abruptas próximas aos zeros do espectro, onde a fase salta de $+\pi$ para $-\pi$ (descontinuidades de $2\pi$ introduzidas pela função \texttt{angle()}, que retorna valores no intervalo $(-\pi, \pi]$).
+
+% ------------------------------------------------------------------ %
+\section{Parte IV: Deslocamento em Frequência}
+
+\lstinputlisting[language=Matlab, caption={{Script para a Parte IV.}}]{codigos/parte4.m}
+
+\noindent Explicação linha a linha do Código~4:
+
+\begin{description}
+  \item[Linhas 1--4:] Comentários que descrevem o objetivo da verificação e listam os dois sinais utilizados e a propriedade esperada.
+
+  \item[Linha 6 --- \texttt{n = 0:10}:] Define o suporte temporal dos sinais, $n = 0, 1, \ldots, 10$.
+
+  \item[Linha 7 --- \texttt{x = cos(pi*n/2)}:] Computa a sequência $x[n] = \cos(\pi n/2)$ para cada $n$ do vetor. A função \texttt{cos()} opera elemento a elemento sobre o vetor, produzindo os valores $\{1, 0, -1, 0, 1, \ldots\}$.
+
+  \item[Linha 8 --- \texttt{y = exp(1j*pi*n/4) .* x}:] Calcula $y[n] = e^{j\pi n/4}\,x[n]$ multiplicando elemento a elemento o vetor de moduladores $e^{j\pi n/4}$ pelo vetor \texttt{x}. O operador \texttt{.*} é indispensável para que a multiplicação seja realizada amostra a amostra, e não como produto de matrizes.
+
+  \item[Linha 10 --- \texttt{w = linspace(-pi, pi, 1001)}:] Gera 1001 pontos de frequência no intervalo $[-\pi, \pi]$, abrangendo um período completo centrado na origem, o que permite visualizar o deslocamento tanto para frequências positivas quanto negativas.
+
+  \item[Linhas 11--12 --- \texttt{Xw = zeros(1,1001); Yw = zeros(1,1001)}:] Pré-aloca os vetores de resultado para as TFTDs de $x[n]$ e $y[n]$, respectivamente.
+
+  \item[Linhas 13--16:] Laço \texttt{for} que itera sobre todos os 1001 pontos de frequência. Em cada iteração $k$:
+    \begin{itemize}
+      \item \texttt{Xw(k) = sum(x .* exp(-1j * w(k) * n))}: aplica a definição da TFTD à sequência $x[n]$, calculando $X(e^{j\omega_k}) = \sum_{n=0}^{10} x[n]\,e^{-j\omega_k n}$.
+      \item \texttt{Yw(k) = sum(y .* exp(-1j * w(k) * n))}: aplica a mesma definição a $y[n]$, calculando $Y(e^{j\omega_k}) = \sum_{n=0}^{10} y[n]\,e^{-j\omega_k n}$.
+    \end{itemize}
+    Ambas as TFTDs são calculadas no mesmo laço para eficiência.
+
+  \item[Linha 18 --- \texttt{figure('Position', [100 100 900 600])}:] Abre a janela gráfica com dimensões 900$\times$600 px.
+
+  \item[Linha 20 --- \texttt{subplot(2,2,1)}:] Ativa o primeiro painel (grade 2$\times$2, posição superior esquerda) para a magnitude de $X(e^{j\omega})$.
+
+  \item[Linha 21 --- \texttt{plot(w/pi, abs(Xw), 'b', 'LineWidth', 1.5)}:] Plota $|X(e^{j\omega})|$ em azul. Espera-se ver picos em $\omega/\pi = \pm 0{,}5$ (i.e., $\omega = \pm\pi/2$), referentes às componentes de cosseno.
+
+  \item[Linhas 22--24:] Rótulos dos eixos, título e grade do primeiro painel.
+
+  \item[Linhas 26--30:] Segundo painel (superior direito): plota $|Y(e^{j\omega})|$ em vermelho. O pico que estava em $\omega/\pi = 0{,}5$ deve aparecer agora em $\omega/\pi = 0{,}75$ (deslocado de $\pi/4$, i.e., $0{,}25\,\pi$ em unidades normalizadas).
+
+  \item[Linhas 32--36:] Terceiro painel (inferior esquerdo): fase $\angle X(e^{j\omega})$ em azul.
+
+  \item[Linhas 38--42:] Quarto painel (inferior direito): fase $\angle Y(e^{j\omega})$ em vermelho.
+
+  \item[Linha 44 --- \texttt{sgtitle(...)}:] Título global que identifica a propriedade verificada.
+
+  \item[Linha 45 --- \texttt{print -dpng figuras/parte4.png}:] Exporta a figura para PNG.
+\end{description}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figuras/parte4.png}
+\caption{Verificação da propriedade de deslocamento em frequência: magnitude e fase de $X(e^{j\omega})$ e $Y(e^{j\omega})$.}\label{fig:p4}
+\end{figure}
+
+\textbf{Espectro de $x[n]$ (magnitude).} O cosseno pode ser decomposto via Euler: $\cos(\pi n/2) = \frac{1}{2}e^{j\pi n/2} + \frac{1}{2}e^{-j\pi n/2}$. Sendo $x[n]$ real e de suporte finito, sua TFTD concentra energia nas frequências $\omega = \pm\pi/2$. No intervalo $[-\pi, \pi]$ exibido, o gráfico de $|X(e^{j\omega})|$ apresenta dois picos simétricos em $\omega/\pi = +0{,}5$ e $\omega/\pi = -0{,}5$. A simetria par da magnitude é garantida pela natureza real de $x[n]$: como $X(e^{-j\omega}) = X^*(e^{j\omega})$, segue-se que $|X(e^{-j\omega})| = |X(e^{j\omega})|$.
+
+\textbf{Espectro de $y[n]$ (magnitude).} Após a modulação por $e^{j\pi n/4}$ ($\omega_0 = \pi/4$), a propriedade \eqref{eq:freq_shift} prevê $Y(e^{j\omega}) = X(e^{j(\omega - \pi/4)})$. Os picos que estavam em $\omega = \pm\pi/2$ deslocam-se de $+\pi/4$, resultando em:
+\begin{itemize}
+  \item Pico em $\omega = +\pi/2 + \pi/4 = +3\pi/4$ ($\omega/\pi = +0{,}75$)
+  \item Pico em $\omega = -\pi/2 + \pi/4 = -\pi/4$ ($\omega/\pi = -0{,}25$)
+\end{itemize}
+O gráfico de $|Y(e^{j\omega})|$ confirma exatamente essas posições. Nota-se que a magnitude de $Y$ \textbf{não é simétrica} em torno de $\omega = 0$: os dois picos, embora de mesma amplitude, estão em posições assimétricas ($-0{,}25\pi$ e $+0{,}75\pi$). Isso ocorre porque $y[n]$ é uma sequência \emph{complexa} (produto de um real por um complexo), e sequências complexas não satisfazem simetria conjugada — a condição $Y(e^{-j\omega}) = Y^*(e^{j\omega})$ só vale para sequências reais.
+
+\textbf{Fase de $x[n]$.} Como $x[n]$ é real, $\angle X(e^{j\omega})$ é uma função ímpar de $\omega$. O gráfico exibe transições abruptas de fase nos picos espectrais (onde a magnitude tende a zero entre os lóbulos), reflexo do comportamento da função \texttt{angle()} que restringe os valores ao intervalo $(-\pi, \pi]$.
+
+\textbf{Fase de $y[n]$.} A fase de $Y(e^{j\omega}) = X(e^{j(\omega-\pi/4)})$ é a fase de $X$ avaliada em $(\omega-\pi/4)$, portanto é a fase de $X$ \emph{transladada} em $\pi/4$ para a direita no eixo de frequência. O gráfico confirma essa relação: o padrão de fase de $Y$ reproduz o de $X$, porém deslocado, e não é mais uma função ímpar de $\omega$ (pois $y[n]$ é complexo), o que é visualmente evidente na assimetria do gráfico em relação à origem.
+
+\chapter{Conclusão}
+
+Este laboratório consolidou o estudo da Transformada de Fourier em Tempo Discreto (TFTD) em suas dimensões analítica e computacional. Através das quatro atividades realizadas, foi possível:
+
+\begin{itemize}
+  \item Calcular analiticamente a TFTD de uma exponencial real de duração infinita, explorando a convergência da série geométrica e identificando o comportamento de filtragem passa-baixas inerente a um polo próximo à origem.
+  \item Avaliar numericamente a TFTD de uma sequência finita de curto comprimento, verificando que em $\omega = 0$ o resultado corresponde à soma de todos os coeficientes.
+  \item Confirmar experimentalmente que a TFTD é sempre $2\pi$-periódica em frequência, propriedade universal decorrente da natureza amostrada dos sinais discretos.
+  \item Verificar graficamente a propriedade de deslocamento em frequência, observando que a multiplicação por uma exponencial complexa $e^{j\omega_0 n}$ no domínio do tempo equivale a uma translação $\omega_0$ no espectro de frequência.
+\end{itemize}
+
+O Octave \cite{octaveman} demonstrou-se uma plataforma adequada para a investigação numérica desses conceitos, permitindo a avaliação da TFTD em um número arbitrário de pontos de frequência e a visualização simultânea de magnitude, fase, parte real e imaginária. Os resultados obtidos estão em plena concordância com a teoria apresentada por Proakis e Manolakis \cite{proakis_manolakis} e Ingle \cite{ingle2017}.
+
+% ----------------------------------------------------------------------------------------------------- %
+\backmatter
+\singlespacing
+% ----------------------------------------------------------------------------------------------------- %
+\bibliography{relatorio_4}
+
+\end{document}

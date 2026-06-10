@@ -1,0 +1,32 @@
+  
+ 
+Laboratório  PDS 03 
+Tema:  Convolução  Linear  
+I – Seja um pulso  retangular  푥[푛] = 푢[푛] − 푢[푛 − 10] a entrada  de um sistema  
+LIT com resposta  ao impulso  ℎ[푛] = (0,9)푛푢[푛]. Determine  a saída  do sistema.  
+Use a definição  matemática  da convolução.  Plote  os sinais  de entrada,  a 
+resposta  ao impulso  e a saída  do sistema  LIT. 
+II – A convolução  linear  apresenta as seguintes propriedades:  
+a) 푥1[푛] ∗ 푥2[푛] = 푥2[푛] ∗ 푥1[푛] 
+b) (푥1[푛] ∗ 푥2[푛]) ∗ 푥3[푛] = 푥1[푛] ∗ (푥2[푛] ∗ 푥3[푛]) Comutação  
+Associação  
+c) 푥1[푛] ∗ (푥2[푛] + 푥3[푛]) = 푥1[푛] ∗ 푥2[푛] + 푥1[푛] ∗ 푥3[푛] Distribuição  
+d) 푥[푛] ∗ 훿[푛 − 푛표] = 푥[푛 − 푛표] Identidade  
+Verifique  essas  propriedades,  usando  o comando  conv , para as seguintes  
+sequencias:  
+푥1[푛]  = 푛(푢[푛  + 8] − 푢[푛 − 10]) 
+푥2[푛]  = cos⁡(0,1휋푛)(푢[푛]  − 푢[푛 − 15]) 
+푥3[푛] = (1,2) (푢 푛 + 5 − 푢 푛 − 10 ) 푛 [ ] [ ] 
+Dica:  estudar o  comando  conv  do Octave.  
+III – Octave  fornece  uma função  conv  que calcula  a convolução  entre  dois 
+sequências  de duração  finita.  Porém,  se as sequências  são de duração  infinita,  
+a conv  não calcula  diretamente  a convolução.  Para  sequências  finitas,  o 
+comando  conv  assume  que as sequências  começam  no tempo  n=0; isso 
+constitui  uma restrição.  Crie uma função  modificada  do conv  que resolva  essa  
+restrição.  Dica:  adicione  informação  dos tempos  de início  e fim das sequências  
+a convoluir  na nova  função  de convolução  modificada,  conv_m  (sugestão).  
+Observações:  
+- Os relatórios  serão  redigidos  digitalmente  na forma de  um relatório  acadêmico.  
+- Enviar  o relatório  ao AVA no formato PDF.  
+Data  limite de Entrega : 13/05/202 6 
+Palmas  – Outo no 202 6 
