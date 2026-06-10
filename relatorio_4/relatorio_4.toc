@@ -1,0 +1,14 @@
+\babel@toc {brazil}{}\relax 
+\contentsline {chapter}{\numberline {1}Introdução}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Metodologia e Procedimentos Práticos}{2}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Parte I -- TFTD de $x[n] = (0{,}5)^n u[n]$}{2}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Parte II -- TFTD de $x[n] = \{1, 2, 3, 4, 5\}$}{2}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Parte III -- TFTD de $x[n] = (0{,}9\,e^{j\pi /3})^n$, $0 \leq n \leq 10$}{2}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Parte IV -- Propriedade de Deslocamento em Frequência}{3}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Resultados e Discussões}{4}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Parte I: Sinal Exponencial Real de Duração Infinita}{4}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Parte II: Sequência Finita $\{1, 2, 3, 4, 5\}$}{7}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Parte III: Periodicidade da TFTD}{11}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Parte IV: Deslocamento em Frequência}{14}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Conclusão}{19}{chapter.4}%
+\contentsline {chapter}{REFER\^ENCIAS}{20}{chapter*.6}%
