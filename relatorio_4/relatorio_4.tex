@@ -209,31 +209,33 @@ A forma fechada $X(e^{j\omega}) = 1/(1 - 0{,}5\,e^{-j\omega})$ foi avaliada dire
 \begin{description}
   \item[Linhas 1--2:] Comentários que descrevem o propósito do script e recordam a forma fechada da TFTD obtida analiticamente. São ignorados pelo interpretador, servindo apenas como documentação.
 
-  \item[Linha 4 --- \texttt{w = linspace(0, pi, 501)}:] Cria um vetor linha \texttt{w} com 501 valores igualmente espaçados entre $0$ e $\pi$, que representam as frequências digitais $\omega$ no intervalo pedido pelo roteiro. O número 501 garante resolução suficiente para visualizar as variações espectrais.
+  \item[Linha 4 --- \texttt{clear; clc; close all}:] Limpa o espaço de trabalho (\texttt{clear}), apaga o terminal (\texttt{clc}) e fecha todas as janelas gráficas abertas (\texttt{close all}), garantindo que a execução parta de um estado limpo e sem interferências de execuções anteriores.
 
-  \item[Linha 5 --- \texttt{X = 1 ./ (1 - 0.5 * exp(-1j * w))}:] Avalia a TFTD em forma fechada para todos os 501 pontos simultaneamente. O operador \texttt{.*} e \texttt{./} (ponto-barra) indicam operações \emph{elemento a elemento} sobre o vetor \texttt{w}. O valor \texttt{-1j} é a unidade imaginária $-j$ do Octave, de modo que \texttt{exp(-1j * w)} computa $e^{-j\omega}$ para cada $\omega \in$ \texttt{w}.
+  \item[Linha 6 --- \texttt{w = linspace(0, pi, 501)}:] Cria um vetor linha \texttt{w} com 501 valores igualmente espaçados entre $0$ e $\pi$, que representam as frequências digitais $\omega$ no intervalo pedido pelo roteiro. O número 501 garante resolução suficiente para visualizar as variações espectrais.
 
-  \item[Linha 7 --- \texttt{figure('Position', [100 100 800 600])}:] Abre uma nova janela gráfica e define sua posição e dimensões em pixels na tela (x=100, y=100, largura=800, altura=600).
+  \item[Linha 7 --- \texttt{X = 1 ./ (1 - 0.5 * exp(-1j * w))}:] Avalia a TFTD em forma fechada para todos os 501 pontos simultaneamente. O operador \texttt{./} (ponto-barra) indica divisão \emph{elemento a elemento} sobre o vetor \texttt{w}. O valor \texttt{-1j} é a unidade imaginária $-j$ do Octave, de modo que \texttt{exp(-1j * w)} computa $e^{-j\omega}$ para cada $\omega \in$ \texttt{w}.
 
-  \item[Linha 9 --- \texttt{subplot(2,2,1)}:] Divide a figura em uma grade de 2 linhas por 2 colunas e ativa o primeiro painel (linha superior esquerda). Os comandos seguintes se aplicam a este painel.
+  \item[Linha 9 --- \texttt{figure('Position', [100 100 800 600])}:] Abre uma nova janela gráfica e define sua posição e dimensões em pixels na tela (x=100, y=100, largura=800, altura=600).
 
-  \item[Linha 10 --- \texttt{plot(w/pi, abs(X), 'b', 'LineWidth', 1.5)}:] Traça a \textbf{magnitude} $|X(e^{j\omega})|$ no eixo vertical contra a frequência normalizada $\omega/\pi$ no eixo horizontal. A normalização por $\pi$ faz com que o eixo vá de 0 a 1, forma convencional em PDS. O argumento \texttt{'b'} define a cor azul e \texttt{'LineWidth', 1.5} aumenta a espessura da linha para melhor legibilidade.
+  \item[Linha 11 --- \texttt{subplot(2,2,1)}:] Divide a figura em uma grade de 2 linhas por 2 colunas e ativa o primeiro painel (linha superior esquerda). Os comandos seguintes se aplicam a este painel.
 
-  \item[Linha 11 --- \texttt{xlabel} e \texttt{ylabel}:] Atribuem rótulos aos eixos horizontal e vertical do painel, respectivamente, usando sintaxe \LaTeX\ para símbolos matemáticos (e.g., \texttt{\textbackslash omega} para $\omega$).
+  \item[Linha 12 --- \texttt{plot(w/pi, abs(X), 'b', 'LineWidth', 1.5)}:] Traça a \textbf{magnitude} $|X(e^{j\omega})|$ no eixo vertical contra a frequência normalizada $\omega/\pi$ no eixo horizontal. A normalização por $\pi$ faz com que o eixo vá de 0 a 1, forma convencional em PDS. O argumento \texttt{'b'} define a cor azul e \texttt{'LineWidth', 1.5} aumenta a espessura da linha para melhor legibilidade.
 
-  \item[Linha 12 --- \texttt{title('Magnitude')}:] Define o título exibido acima do painel.
+  \item[Linha 13 --- \texttt{xlabel} e \texttt{ylabel}:] Atribuem rótulos aos eixos horizontal e vertical do painel, respectivamente, usando sintaxe \LaTeX\ para símbolos matemáticos (e.g., \texttt{\textbackslash omega} para $\omega$).
 
-  \item[Linha 13 --- \texttt{grid on}:] Exibe linhas de grade no plano cartesiano do painel, facilitando a leitura de valores.
+  \item[Linha 14 --- \texttt{title('Magnitude')}:] Define o título exibido acima do painel.
 
-  \item[Linhas 15--19:] Repetem a mesma lógica para o \textbf{segundo painel} (linha superior direita), desta vez plotando a \textbf{fase} $\angle X(e^{j\omega})$, extraída pela função \texttt{angle()}, que retorna o argumento do número complexo em radianos, no intervalo $(-\pi, \pi]$. A cor vermelha (\texttt{'r'}) diferencia visualmente este painel.
+  \item[Linha 15 --- \texttt{grid on}:] Exibe linhas de grade no plano cartesiano do painel, facilitando a leitura de valores.
 
-  \item[Linhas 21--25:] Ativam o \textbf{terceiro painel} (linha inferior esquerda) e plotam a \textbf{parte real} $\text{Re}\{X(e^{j\omega})\}$ via função \texttt{real()}, em verde (\texttt{'g'}).
+  \item[Linhas 17--21:] Repetem a mesma lógica para o \textbf{segundo painel} (linha superior direita), desta vez plotando a \textbf{fase} $\angle X(e^{j\omega})$, extraída pela função \texttt{angle()}, que retorna o argumento do número complexo em radianos, no intervalo $(-\pi, \pi]$. A cor vermelha (\texttt{'r'}) diferencia visualmente este painel.
 
-  \item[Linhas 27--31:] Ativam o \textbf{quarto painel} (linha inferior direita) e plotam a \textbf{parte imaginária} $\text{Im}\{X(e^{j\omega})\}$ via função \texttt{imag()}, em magenta (\texttt{'m'}).
+  \item[Linhas 23--27:] Ativam o \textbf{terceiro painel} (linha inferior esquerda) e plotam a \textbf{parte real} $\text{Re}\{X(e^{j\omega})\}$ via função \texttt{real()}, em verde (\texttt{'g'}).
 
-  \item[Linha 33 --- \texttt{sgtitle(...)}:] Define um título global para a figura inteira (acima de todos os subplots), disponível a partir do Octave 6. Serve para identificar o contexto geral do gráfico.
+  \item[Linhas 29--33:] Ativam o \textbf{quarto painel} (linha inferior direita) e plotam a \textbf{parte imaginária} $\text{Im}\{X(e^{j\omega})\}$ via função \texttt{imag()}, em magenta (\texttt{'m'}).
 
-  \item[Linha 34 --- \texttt{print -dpng figuras/parte1.png}:] Salva a figura atual no disco em formato PNG, no caminho relativo \texttt{figuras/parte1.png}, para posterior inclusão no relatório.
+  \item[Linha 35 --- \texttt{saveas(gcf, '../figuras/parte1.png')}:] Salva a figura atual (\texttt{gcf} = \emph{get current figure}) em disco no formato PNG. O caminho \texttt{../figuras/} sobe um nível a partir da pasta \texttt{codigos/} onde o script reside, chegando à raiz do relatório onde está a pasta \texttt{figuras/}.
+
+  \item[Linha 36 --- \texttt{disp(...)}:] Exibe uma mensagem de confirmação no terminal, informando que o script foi concluído com sucesso.
 \end{description}
 
 \begin{figure}[H]
@@ -266,25 +268,27 @@ Por tratar-se de uma soma finita, a TFTD foi calculada diretamente pela definiç
 \begin{description}
   \item[Linhas 1--2:] Comentários descritivos do script.
 
-  \item[Linha 4 --- \texttt{x = [1 2 3 4 5]}:] Define o vetor linha com os coeficientes da sequência $x[n] = \{1, 2, 3, 4, 5\}$ para $n = 0, 1, 2, 3, 4$.
+  \item[Linha 4 --- \texttt{clear; clc; close all}:] Reinicia o ambiente de trabalho, limpando variáveis, terminal e figuras abertas.
 
-  \item[Linha 5 --- \texttt{n = 0:4}:] Cria o vetor de índices de tempo $n = [0, 1, 2, 3, 4]$, correspondente ao suporte da sequência. É essencial manter \texttt{x} e \texttt{n} com o mesmo comprimento para que a multiplicação elemento a elemento funcione corretamente.
+  \item[Linha 6 --- \texttt{x = [1 2 3 4 5]}:] Define o vetor linha com os coeficientes da sequência $x[n] = \{1, 2, 3, 4, 5\}$ para $n = 0, 1, 2, 3, 4$.
 
-  \item[Linha 6 --- \texttt{w = linspace(0, pi, 501)}:] Idêntico à Parte I: gera os 501 pontos de frequência equidistantes em $[0, \pi]$.
+  \item[Linha 7 --- \texttt{n = 0:4}:] Cria o vetor de índices de tempo $n = [0, 1, 2, 3, 4]$, correspondente ao suporte da sequência. É essencial manter \texttt{x} e \texttt{n} com o mesmo comprimento para que a multiplicação elemento a elemento funcione corretamente.
 
-  \item[Linha 8 --- \texttt{X = zeros(1, 501)}:] Pré-aloca o vetor resultado com zeros. Isso é uma prática recomendada em Octave/MATLAB pois evita o redimensionamento dinâmico do vetor a cada iteração do laço, tornando o código mais eficiente.
+  \item[Linha 8 --- \texttt{w = linspace(0, pi, 501)}:] Idêntico à Parte I: gera os 501 pontos de frequência equidistantes em $[0, \pi]$.
 
-  \item[Linha 9 --- \texttt{for k = 1:501}:] Inicia um laço que percorre todos os 501 índices de frequência. A variável \texttt{k} indexa tanto o vetor \texttt{w} quanto o vetor resultado \texttt{X}.
+  \item[Linha 10 --- \texttt{X = zeros(1, 501)}:] Pré-aloca o vetor resultado com zeros. Isso é uma prática recomendada em Octave/MATLAB pois evita o redimensionamento dinâmico do vetor a cada iteração do laço, tornando o código mais eficiente.
 
-  \item[Linha 10 --- \texttt{X(k) = sum(x .* exp(-1j * w(k) * n))}:] Calcula o $k$-ésimo ponto da TFTD pela definição direta: $X(e^{j\omega_k}) = \sum_{n=0}^{4} x[n]\,e^{-j\omega_k n}$. O produto \texttt{x .* exp(-1j * w(k) * n)} computa o produto elemento a elemento $x[n] \cdot e^{-j\omega_k n}$ para todo $n$ simultaneamente, e \texttt{sum()} soma esses produtos, realizando o somatório da TFTD em uma única instrução vetorial.
+  \item[Linha 11 --- \texttt{for k = 1:501}:] Inicia um laço que percorre todos os 501 índices de frequência. A variável \texttt{k} indexa tanto o vetor \texttt{w} quanto o vetor resultado \texttt{X}.
 
-  \item[Linha 11 --- \texttt{end}:] Encerra o bloco do laço \texttt{for}.
+  \item[Linha 12 --- \texttt{X(k) = sum(x .* exp(-1j * w(k) * n))}:] Calcula o $k$-ésimo ponto da TFTD pela definição direta: $X(e^{j\omega_k}) = \sum_{n=0}^{4} x[n]\,e^{-j\omega_k n}$. O produto \texttt{x .* exp(-1j * w(k) * n)} computa o produto elemento a elemento $x[n] \cdot e^{-j\omega_k n}$ para todo $n$ simultaneamente, e \texttt{sum()} soma esses produtos, realizando o somatório da TFTD em uma única instrução vetorial.
 
-  \item[Linhas 13--31:] Estrutura gráfica idêntica à Parte I: abre a figura, cria quatro subplots e plota magnitude, fase, parte real e parte imaginária de \texttt{X}.
+  \item[Linha 13 --- \texttt{end}:] Encerra o bloco do laço \texttt{for}.
 
-  \item[Linha 33 --- \texttt{sgtitle(...)}:] Título global com o nome da sequência.
+  \item[Linhas 15--33:] Estrutura gráfica idêntica à Parte I: abre a figura, cria quatro subplots e plota magnitude, fase, parte real e parte imaginária de \texttt{X}.
 
-  \item[Linha 34 --- \texttt{print -dpng figuras/parte2.png}:] Exporta a figura para PNG.
+  \item[Linha 35 --- \texttt{saveas(gcf, '../figuras/parte2.png')}:] Salva a figura em PNG usando o mesmo padrão de caminho relativo da Parte I.
+
+  \item[Linha 36 --- \texttt{disp(...)}:] Confirma no terminal que o script foi concluído.
 \end{description}
 
 \begin{figure}[H]
@@ -313,35 +317,37 @@ O espectro foi calculado no intervalo estendido $[-2\pi, 2\pi]$ para evidenciar 
 \begin{description}
   \item[Linhas 1--2:] Comentários que identificam o script e o objetivo de investigar a periodicidade.
 
-  \item[Linha 4 --- \texttt{n = 0:10}:] Define o vetor de índices de tempo $n = 0, 1, \ldots, 10$, correspondente ao suporte da sequência.
+  \item[Linha 4 --- \texttt{clear; clc; close all}:] Reinicia o ambiente de trabalho.
 
-  \item[Linha 5 --- \texttt{x = (0.9 * exp(1j*pi/3)).{\textasciicircum}n}:] Computa a sequência $x[n] = (0{,}9 \cdot e^{j\pi/3})^n$ para todos os $n$ simultaneamente. O operador \texttt{.{\textasciicircum}} realiza a exponenciação elemento a elemento do vetor \texttt{n}. O valor \texttt{1j*pi/3} representa o ângulo $j\pi/3$ na forma polar, de modo que \texttt{0.9 * exp(1j*pi/3)} é o número complexo $0{,}9 e^{j\pi/3}$.
+  \item[Linha 6 --- \texttt{n = 0:10}:] Define o vetor de índices de tempo $n = 0, 1, \ldots, 10$, correspondente ao suporte da sequência.
 
-  \item[Linha 8 --- \texttt{w = linspace(-2*pi, 2*pi, 2001)}:] Gera 2001 pontos de frequência no intervalo $[-2\pi, 2\pi]$, duas vezes mais largo que o usual, para revelar a repetição do espectro em múltiplos de $2\pi$.
+  \item[Linha 7 --- \texttt{x = (0.9 * exp(1j*pi/3)).{\textasciicircum}n}:] Computa a sequência $x[n] = (0{,}9 \cdot e^{j\pi/3})^n$ para todos os $n$ simultaneamente. O operador \texttt{.{\textasciicircum}} realiza a exponenciação elemento a elemento do vetor \texttt{n}. O valor \texttt{1j*pi/3} representa o ângulo $j\pi/3$ na forma polar, de modo que \texttt{0.9 * exp(1j*pi/3)} é o número complexo $0{,}9 e^{j\pi/3}$.
 
-  \item[Linha 9 --- \texttt{X = zeros(1, 2001)}:] Pré-aloca o vetor resultado com 2001 posições, correspondentes à malha de frequências definida.
+  \item[Linha 10 --- \texttt{w = linspace(-2*pi, 2*pi, 2001)}:] Gera 2001 pontos de frequência no intervalo $[-2\pi, 2\pi]$, duas vezes mais largo que o usual, para revelar a repetição do espectro em múltiplos de $2\pi$.
 
-  \item[Linhas 10--12:] Laço \texttt{for} que calcula a TFTD ponto a ponto pela definição, exatamente como na Parte II, mas agora para 2001 frequências e com a sequência complexa \texttt{x}.
+  \item[Linha 11 --- \texttt{X = zeros(1, 2001)}:] Pré-aloca o vetor resultado com 2001 posições, correspondentes à malha de frequências definida.
 
-  \item[Linha 14 --- \texttt{figure('Position', [100 100 900 500])}:] Abre a janela gráfica com dimensões ligeiramente mais largas (900$\times$500 px) para acomodar bem os dois subplots empilhados verticalmente.
+  \item[Linhas 12--14:] Laço \texttt{for} que calcula a TFTD ponto a ponto pela definição, exatamente como na Parte II, mas agora para 2001 frequências e com a sequência complexa \texttt{x}.
 
-  \item[Linha 16 --- \texttt{subplot(2,1,1)}:] Divide a figura em 2 linhas e 1 coluna e ativa o painel superior, onde será plotada a magnitude.
+  \item[Linha 16 --- \texttt{figure('Position', [100 100 900 500])}:] Abre a janela gráfica com dimensões ligeiramente mais largas (900$\times$500 px) para acomodar bem os dois subplots empilhados verticalmente.
 
-  \item[Linha 17 --- \texttt{plot(w/pi, abs(X), 'b', 'LineWidth', 1.5)}:] Plota a magnitude do espectro em função de $\omega/\pi$, de modo que o eixo horizontal vai de $-2$ a $2$, evidenciando dois períodos completos do espectro.
+  \item[Linha 18 --- \texttt{subplot(2,1,1)}:] Divide a figura em 2 linhas e 1 coluna e ativa o painel superior, onde será plotada a magnitude.
 
-  \item[Linhas 18--19:] Rótulos dos eixos e título do painel superior.
+  \item[Linha 19 --- \texttt{plot(w/pi, abs(X), 'b', 'LineWidth', 1.5)}:] Plota a magnitude do espectro em função de $\omega/\pi$, de modo que o eixo horizontal vai de $-2$ a $2$, evidenciando dois períodos completos do espectro.
 
-  \item[Linha 20 --- \texttt{xline(-1, '--k'); xline(0, '--k'); xline(1, '--k'); xline(2, '--k')}:] Traça linhas verticais tracejadas em $\omega/\pi = -1, 0, 1, 2$ (equivalentes a $\omega = -\pi, 0, \pi, 2\pi$). Essas linhas marcam as fronteiras de cada período e tornam visualmente imediata a periodicidade do espectro.
+  \item[Linhas 20--21:] Rótulos dos eixos e título do painel superior.
 
-  \item[Linha 21 --- \texttt{xticks(-2:0.5:2)}:] Define os valores exibidos no eixo horizontal com passo de $0{,}5$, de $-2$ a $2$, facilitando a leitura das posições dos picos espectrais.
+  \item[Linha 22 --- \texttt{xline(-1, '--k'); xline(0, '--k'); xline(1, '--k'); xline(2, '--k')}:] Traça linhas verticais tracejadas em $\omega/\pi = -1, 0, 1, 2$ (equivalentes a $\omega = -\pi, 0, \pi, 2\pi$). Essas linhas marcam as fronteiras de cada período e tornam visualmente imediata a periodicidade do espectro.
 
-  \item[Linha 22 --- \texttt{grid on}:] Ativa a grade do painel.
+  \item[Linha 23 --- \texttt{xticks(-2:0.5:2)}:] Define os valores exibidos no eixo horizontal com passo de $0{,}5$, de $-2$ a $2$, facilitando a leitura das posições dos picos espectrais.
 
-  \item[Linhas 24--30:] Repetem a lógica para o painel inferior, plotando desta vez a \textbf{fase} do espectro, com as mesmas linhas verticais e marcações de eixo, para confirmar que a periodicidade de $2\pi$ vale também para a informação de fase.
+  \item[Linha 24 --- \texttt{grid on}:] Ativa a grade do painel.
 
-  \item[Linha 32 --- \texttt{sgtitle(...)}:] Título global da figura.
+  \item[Linhas 26--32:] Repetem a lógica para o painel inferior, plotando desta vez a \textbf{fase} do espectro, com as mesmas linhas verticais e marcações de eixo, para confirmar que a periodicidade de $2\pi$ vale também para a informação de fase.
 
-  \item[Linha 33 --- \texttt{print -dpng figuras/parte3.png}:] Exporta a figura.
+  \item[Linha 34 --- \texttt{saveas(gcf, '../figuras/parte3.png')}:] Salva a figura em PNG.
+
+  \item[Linha 35 --- \texttt{disp(...)}:] Confirma no terminal que o script foi concluído.
 \end{description}
 
 \begin{figure}[H]
@@ -374,40 +380,42 @@ As linhas verticais tracejadas em $\omega/\pi = -2, -1, 0, 1, 2$ delimitam os pe
 \begin{description}
   \item[Linhas 1--4:] Comentários que descrevem o objetivo da verificação e listam os dois sinais utilizados e a propriedade esperada.
 
-  \item[Linha 6 --- \texttt{n = 0:10}:] Define o suporte temporal dos sinais, $n = 0, 1, \ldots, 10$.
+  \item[Linha 6 --- \texttt{clear; clc; close all}:] Reinicia o ambiente de trabalho.
 
-  \item[Linha 7 --- \texttt{x = cos(pi*n/2)}:] Computa a sequência $x[n] = \cos(\pi n/2)$ para cada $n$ do vetor. A função \texttt{cos()} opera elemento a elemento sobre o vetor, produzindo os valores $\{1, 0, -1, 0, 1, \ldots\}$.
+  \item[Linha 8 --- \texttt{n = 0:10}:] Define o suporte temporal dos sinais, $n = 0, 1, \ldots, 10$.
 
-  \item[Linha 8 --- \texttt{y = exp(1j*pi*n/4) .* x}:] Calcula $y[n] = e^{j\pi n/4}\,x[n]$ multiplicando elemento a elemento o vetor de moduladores $e^{j\pi n/4}$ pelo vetor \texttt{x}. O operador \texttt{.*} é indispensável para que a multiplicação seja realizada amostra a amostra, e não como produto de matrizes.
+  \item[Linha 9 --- \texttt{x = cos(pi*n/2)}:] Computa a sequência $x[n] = \cos(\pi n/2)$ para cada $n$ do vetor. A função \texttt{cos()} opera elemento a elemento sobre o vetor, produzindo os valores $\{1, 0, -1, 0, 1, \ldots\}$.
 
-  \item[Linha 10 --- \texttt{w = linspace(-pi, pi, 1001)}:] Gera 1001 pontos de frequência no intervalo $[-\pi, \pi]$, abrangendo um período completo centrado na origem, o que permite visualizar o deslocamento tanto para frequências positivas quanto negativas.
+  \item[Linha 10 --- \texttt{y = exp(1j*pi*n/4) .* x}:] Calcula $y[n] = e^{j\pi n/4}\,x[n]$ multiplicando elemento a elemento o vetor de moduladores $e^{j\pi n/4}$ pelo vetor \texttt{x}. O operador \texttt{.*} é indispensável para que a multiplicação seja realizada amostra a amostra, e não como produto de matrizes.
 
-  \item[Linhas 11--12 --- \texttt{Xw = zeros(1,1001); Yw = zeros(1,1001)}:] Pré-aloca os vetores de resultado para as TFTDs de $x[n]$ e $y[n]$, respectivamente.
+  \item[Linha 12 --- \texttt{w = linspace(-pi, pi, 1001)}:] Gera 1001 pontos de frequência no intervalo $[-\pi, \pi]$, abrangendo um período completo centrado na origem, o que permite visualizar o deslocamento tanto para frequências positivas quanto negativas.
 
-  \item[Linhas 13--16:] Laço \texttt{for} que itera sobre todos os 1001 pontos de frequência. Em cada iteração $k$:
+  \item[Linhas 13--14 --- \texttt{Xw = zeros(1,1001); Yw = zeros(1,1001)}:] Pré-aloca os vetores de resultado para as TFTDs de $x[n]$ e $y[n]$, respectivamente.
+
+  \item[Linhas 15--18:] Laço \texttt{for} que itera sobre todos os 1001 pontos de frequência. Em cada iteração $k$:
     \begin{itemize}
       \item \texttt{Xw(k) = sum(x .* exp(-1j * w(k) * n))}: aplica a definição da TFTD à sequência $x[n]$, calculando $X(e^{j\omega_k}) = \sum_{n=0}^{10} x[n]\,e^{-j\omega_k n}$.
       \item \texttt{Yw(k) = sum(y .* exp(-1j * w(k) * n))}: aplica a mesma definição a $y[n]$, calculando $Y(e^{j\omega_k}) = \sum_{n=0}^{10} y[n]\,e^{-j\omega_k n}$.
     \end{itemize}
     Ambas as TFTDs são calculadas no mesmo laço para eficiência.
 
-  \item[Linha 18 --- \texttt{figure('Position', [100 100 900 600])}:] Abre a janela gráfica com dimensões 900$\times$600 px.
+  \item[Linha 20 --- \texttt{figure('Position', [100 100 900 600])}:] Abre a janela gráfica com dimensões 900$\times$600 px.
 
-  \item[Linha 20 --- \texttt{subplot(2,2,1)}:] Ativa o primeiro painel (grade 2$\times$2, posição superior esquerda) para a magnitude de $X(e^{j\omega})$.
+  \item[Linha 22 --- \texttt{subplot(2,2,1)}:] Ativa o primeiro painel (grade 2$\times$2, posição superior esquerda) para a magnitude de $X(e^{j\omega})$.
 
-  \item[Linha 21 --- \texttt{plot(w/pi, abs(Xw), 'b', 'LineWidth', 1.5)}:] Plota $|X(e^{j\omega})|$ em azul. Espera-se ver picos em $\omega/\pi = \pm 0{,}5$ (i.e., $\omega = \pm\pi/2$), referentes às componentes de cosseno.
+  \item[Linha 23 --- \texttt{plot(w/pi, abs(Xw), 'b', 'LineWidth', 1.5)}:] Plota $|X(e^{j\omega})|$ em azul. Espera-se ver picos em $\omega/\pi = \pm 0{,}5$ (i.e., $\omega = \pm\pi/2$), referentes às componentes de cosseno.
 
-  \item[Linhas 22--24:] Rótulos dos eixos, título e grade do primeiro painel.
+  \item[Linhas 24--26:] Rótulos dos eixos, título e grade do primeiro painel.
 
-  \item[Linhas 26--30:] Segundo painel (superior direito): plota $|Y(e^{j\omega})|$ em vermelho. O pico que estava em $\omega/\pi = 0{,}5$ deve aparecer agora em $\omega/\pi = 0{,}75$ (deslocado de $\pi/4$, i.e., $0{,}25\,\pi$ em unidades normalizadas).
+  \item[Linhas 28--32:] Segundo painel (superior direito): plota $|Y(e^{j\omega})|$ em vermelho. O pico que estava em $\omega/\pi = 0{,}5$ deve aparecer agora em $\omega/\pi = 0{,}75$ (deslocado de $\pi/4$, i.e., $0{,}25\,\pi$ em unidades normalizadas).
 
-  \item[Linhas 32--36:] Terceiro painel (inferior esquerdo): fase $\angle X(e^{j\omega})$ em azul.
+  \item[Linhas 34--38:] Terceiro painel (inferior esquerdo): fase $\angle X(e^{j\omega})$ em azul.
 
-  \item[Linhas 38--42:] Quarto painel (inferior direito): fase $\angle Y(e^{j\omega})$ em vermelho.
+  \item[Linhas 40--44:] Quarto painel (inferior direito): fase $\angle Y(e^{j\omega})$ em vermelho.
 
-  \item[Linha 44 --- \texttt{sgtitle(...)}:] Título global que identifica a propriedade verificada.
+  \item[Linha 46 --- \texttt{saveas(gcf, '../figuras/parte4.png')}:] Salva a figura em PNG.
 
-  \item[Linha 45 --- \texttt{print -dpng figuras/parte4.png}:] Exporta a figura para PNG.
+  \item[Linha 47 --- \texttt{disp(...)}:] Confirma no terminal que o script foi concluído.
 \end{description}
 
 \begin{figure}[H]

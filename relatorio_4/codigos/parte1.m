@@ -1,6 +1,8 @@
 % Parte I - TFTD de x[n] = (0.5)^n * u[n]
 % X(e^jw) = 1 / (1 - 0.5*e^{-jw}), forma fechada da serie geometrica
 
+clear; clc; close all;
+
 w = linspace(0, pi, 501);
 X = 1 ./ (1 - 0.5 * exp(-1j * w));
 
@@ -30,5 +32,5 @@ xlabel('\omega/\pi'); ylabel('Im\{X(e^{j\omega})\}');
 title('Parte Imaginaria');
 grid on;
 
-sgtitle('TFTD de x[n] = (0,5)^n u[n]');
-print -dpng figuras/parte1.png
+saveas(gcf, '../figuras/parte1.png');
+disp('Parte I concluida. Figura salva.');

@@ -1,6 +1,8 @@
 % Parte III - TFTD de x[n] = (0.9*exp(j*pi/3))^n, 0 <= n <= 10
 % Investigacao da periodicidade 2*pi
 
+clear; clc; close all;
+
 n = 0:10;
 x = (0.9 * exp(1j*pi/3)).^n;
 
@@ -29,5 +31,5 @@ xline(-1, '--k'); xline(0, '--k'); xline(1, '--k'); xline(2, '--k');
 xticks(-2:0.5:2);
 grid on;
 
-sgtitle('TFTD de x[n] = (0,9 e^{j\pi/3})^n, 0 \leq n \leq 10');
-print -dpng figuras/parte3.png
+saveas(gcf, '../figuras/parte3.png');
+disp('Parte III concluida. Figura salva.');

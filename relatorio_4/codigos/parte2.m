@@ -1,6 +1,8 @@
 % Parte II - TFTD de x[n] = {1, 2, 3, 4, 5}
 % X(e^jw) = sum_{n=0}^{4} x[n] * e^{-jwn}
 
+clear; clc; close all;
+
 x = [1 2 3 4 5];
 n = 0:4;
 w = linspace(0, pi, 501);
@@ -36,5 +38,5 @@ xlabel('\omega/\pi'); ylabel('Im\{X(e^{j\omega})\}');
 title('Parte Imaginaria');
 grid on;
 
-sgtitle('TFTD de x[n] = \{1, 2, 3, 4, 5\}');
-print -dpng figuras/parte2.png
+saveas(gcf, '../figuras/parte2.png');
+disp('Parte II concluida. Figura salva.');

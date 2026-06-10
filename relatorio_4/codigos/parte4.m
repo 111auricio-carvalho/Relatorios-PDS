@@ -3,6 +3,8 @@
 % y[n] = exp(j*pi*n/4) * x[n]
 % Propriedade: Y(e^jw) = X(e^j(w - pi/4))
 
+clear; clc; close all;
+
 n = 0:10;
 x = cos(pi*n/2);
 y = exp(1j*pi*n/4) .* x;
@@ -41,5 +43,5 @@ xlabel('\omega/\pi'); ylabel('\angle Y(e^{j\omega}) (rad)');
 title('Fase de Y(e^{j\omega})');
 grid on;
 
-sgtitle('Deslocamento em Frequencia: Y(e^{j\omega}) = X(e^{j(\omega-\pi/4)})');
-print -dpng figuras/parte4.png
+saveas(gcf, '../figuras/parte4.png');
+disp('Parte IV concluida. Figura salva.');
