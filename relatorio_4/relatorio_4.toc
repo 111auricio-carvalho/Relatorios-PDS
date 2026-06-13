@@ -7,8 +7,8 @@
 \contentsline {section}{\numberline {2.4}Parte IV -- Propriedade de Deslocamento em Frequência}{3}{section.2.4}%
 \contentsline {chapter}{\numberline {3}Resultados e Discussões}{4}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Parte I: Sinal Exponencial Real de Duração Infinita}{4}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Parte II: Sequência Finita $\{1, 2, 3, 4, 5\}$}{7}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Parte III: Periodicidade da TFTD}{11}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Parte IV: Deslocamento em Frequência}{14}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Conclusão}{19}{chapter.4}%
-\contentsline {chapter}{REFER\^ENCIAS}{20}{chapter*.6}%
+\contentsline {section}{\numberline {3.2}Parte II: Sequência Finita $\{1, 2, 3, 4, 5\}$}{6}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Parte III: Periodicidade da TFTD}{9}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Parte IV: Deslocamento em Frequência}{11}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Conclusão}{15}{chapter.4}%
+\contentsline {chapter}{REFER\^ENCIAS}{16}{chapter*.6}%
