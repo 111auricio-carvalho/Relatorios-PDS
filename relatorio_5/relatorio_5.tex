@@ -1,0 +1,300 @@
+% ----------------------------------------------------------------------------------------------------- %
+% Relatório 5 de PDS - Baseado na classe UFTeX
+% ----------------------------------------------------------------------------------------------------- %
+
+\documentclass[tcc]{classe_uftex/uftex}
+% ---- Esse comando cria o nome uftex estilizado
+\newcommand\uftex{UF\TeX}
+
+\usepackage{lipsum}
+\usepackage{tikz}
+\usepackage[siunitx]{circuitikz}
+\usetikzlibrary{arrows}
+
+\usepackage[alf,abnt-emphasize=bf]{referencias_abnt/abntex2cite}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{mathptmx} % Times New Roman (ABNT)
+\usepackage{float}
+
+\renewcommand{\lstlistingname}{Código}
+\renewcommand{\lstlistlistingname}{Lista de Códigos}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.98,0.98,0.98}
+\definecolor{codeblue}{rgb}{0,0,0.8}
+
+\lstset{
+  language=Matlab,
+  backgroundcolor=\color{backcolour},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{codeblue}\bfseries,
+  numberstyle=\normalsize\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\small\color{black},
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=12pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2,
+  frame=lines,
+  rulecolor=\color{black!30},
+  xleftmargin=20pt,
+  framexleftmargin=5pt,
+  aboveskip=20pt,
+  belowskip=20pt,
+  extendedchars=true,
+  literate=
+    {á}{{\'a}}1 {ã}{{\~a}}1 {â}{{\^a}}1 {à}{{\`a}}1
+    {é}{{\'e}}1 {ê}{{\^e}}1
+    {í}{{\'i}}1
+    {ó}{{\'o}}1 {õ}{{\~o}}1 {ô}{{\^o}}1
+    {ú}{{\'u}}1
+    {ç}{{\c c}}1
+    {Á}{{\'A}}1 {Ã}{{\~A}}1 {Â}{{\^A}}1 {À}{{\`A}}1
+    {É}{{\'E}}1 {Ê}{{\^E}}1
+    {Í}{{\'I}}1
+    {Ó}{{\'O}}1 {Õ}{{\~O}}1 {Ô}{{\^O}}1
+    {Ú}{{\'U}}1
+    {Ç}{{\c C}}1
+}
+
+\renewcommand{\backrefpagesname}{}
+\renewcommand{\backref}{}
+\renewcommand*{\backrefalt}[4]{}
+
+% ---- Ajuste para transformar a capa de TCC em Relatório e numeração no rodapé
+\makeatletter
+\renewcommand*{\ps@plain}{%
+  \let\@mkboth\@gobbletwo
+  \let\@oddhead\@empty
+  \def\@oddfoot{%
+    \reset@font
+    \hfil
+    \thepage
+  }%
+  \let\@evenhead\@empty
+  \let\@evenfoot\@oddfoot
+}
+
+\renewcommand\frontpage@maintext{
+  \sloppy\nohyphens{Relatório de Laboratório apresentado à disciplina de Processamento Digital de Sinais do curso de \local@deptname\ da \local@universityname .
+
+ \vspace{.5cm}
+  \nohyphens{%
+    \count1=0
+    \@whilenum \count1<\@advisor \do{%
+    \ifcase\count1 % same as \ifnum0=\count1
+        Professor: \csname uftAdvisorDegree:\the\count1 \endcsname \
+        \csname uftAdvisorName:\the\count1 \endcsname \
+        \csname uftAdvisorSurname:\the\count1 \endcsname \ \par
+    \else
+        \local@coadvisorstring: \csname uftAdvisorDegree:\the\count1 \endcsname \
+        \csname uftAdvisorName:\the\count1 \endcsname \
+        \csname uftAdvisorSurname:\the\count1 \endcsname \ \par
+    \fi
+    \advance\count1 by 1}
+  } \par
+}
+}
+\makeatother
+
+% ---- Início do documento
+\begin{document}
+  % ---- Descrição do título do trabalho
+  \title{Relatório 5 de PDS: Transformada de Fourier Discreta}
+  % ---- Nome do autor ou autores do trabalho
+  \author{Maurício}{Moura de Carvalho}
+  % ---- Nome do orientador do trabalho.
+  \advisor{Prof.}{Ivan}{Ney Alvizuri Romani}{Dr.}
+
+  % ---- Departamento
+  \department{EE}
+
+  % ---- Data
+  \date{22}{06}{2026}
+
+  % ---- Palavras-chaves
+  \keyword{Processamento Digital de Sinais}
+  \keyword{Transformada de Fourier Discreta}
+  \keyword{Octave}
+
+  % ---- Palavras-chaves em inglês
+  \foreignkeyword{Digital Signal Processing}
+  \foreignkeyword{Discrete Fourier Transform}
+  \foreignkeyword{Octave}
+
+  \maketitle
+  \frontmatter
+
+  % ---- Cria o sumário
+  \tableofcontents
+
+  % --- Marca o inicio dos elementos textuais
+  \mainmatter
+  \setcounter{page}{1}
+  \onehalfspacing
+
+% ----------------------------------------------------------------------------------------------------- %
+% Capítulos do trabalho
+% ----------------------------------------------------------------------------------------------------- %
+
+\chapter{Introdução}
+
+Este relatório apresenta os resultados do quinto laboratório da disciplina de Processamento Digital de Sinais (PDS), dedicado ao tema da \textbf{Transformada de Fourier Discreta (TFD)}. Diferentemente da Transformada de Fourier em Tempo Discreto (TFTD), que produz um espectro contínuo e periódico em frequência, a TFD opera sobre um número finito de amostras tanto no domínio do tempo quanto no domínio da frequência, sendo a ferramenta fundamental para o processamento digital de sinais em sistemas computacionais reais, onde apenas um número finito de pontos de frequência pode ser representado.
+
+A TFD pode ser entendida como o resultado da amostragem da TFTD em $N$ pontos equidistantes no intervalo $[0, 2\pi)$, e sua formulação matricial -- por meio da matriz $W_N$ -- evidencia a relação direta entre as equações de análise e síntese. Esta dualidade matricial é também a base teórica do algoritmo da Transformada Rápida de Fourier (FFT), que reduz a complexidade computacional do cálculo da TFD de $O(N^2)$ para $O(N\log N)$ ao explorar a fatoração de $N$.
+
+O objetivo desta prática foi: (i) implementar e validar as equações vetoriais de análise e síntese da TFD; (ii) comparar a TFTD com a TFD de 4 pontos de um pulso retangular, evidenciando a relação de amostragem entre ambas; (iii) investigar a distinção entre densidade espectral e resolução espectral por meio da separação de duas senoides de frequências próximas; e (iv) avaliar experimentalmente o tempo de execução da FFT em função de $N$, contrastando o desempenho para valores primos e compostos. As implementações foram realizadas no ambiente Octave \cite{octaveman}, seguindo o roteiro de laboratório \cite{roteiro05} e com suporte teórico nas referências de Proakis e Manolakis \cite{proakis_manolakis}, Oppenheim e Willsky \cite{oppenheim_willsky} e Ingle e Proakis \cite{ingle2017}.
+
+\chapter{Metodologia e Procedimentos Práticos}
+
+\section{Parte I -- Equações Vetoriais de Análise e Síntese da TFD}
+
+As equações de análise e síntese da TFD podem ser escritas em forma vetorial por meio da matriz $W_N$, cujos elementos são as raízes $N$-ésimas da unidade:
+\begin{equation}
+  W_N(k,n) = e^{-j\frac{2\pi}{N}kn}, \qquad 0 \leq k,n \leq N-1
+  \label{eq:wn_def}
+\end{equation}
+de modo que a análise (equação a) e a síntese (equação b) tornam-se, respectivamente:
+\begin{equation}
+  \mathbf{X} = W_N\,\mathbf{x}, \qquad
+  \mathbf{x} = \frac{1}{N}W_N^{*}\,\mathbf{X}
+  \label{eq:dft_matricial}
+\end{equation}
+em que $\mathbf{x}$ e $\mathbf{X}$ são vetores-coluna contendo, respectivamente, as $N$ amostras de $x[n]$ e os $N$ coeficientes $X[k]$. Foi implementado um programa no Octave para construir explicitamente a matriz $W_N$, calcular $\mathbf{X}$ a partir de $\mathbf{x}$ pela equação (a), reconstruir $\mathbf{x}$ a partir de $\mathbf{X}$ pela equação (b), e comparar os resultados com a função nativa \texttt{fft} do Octave.
+
+\section{Parte II -- TFTD e TFD de 4 Pontos do Pulso Retangular}
+
+Para a sequência $x[n] = 1$, $0 \leq n \leq 3$ (e $0$ para os demais $n$), foram calculadas: (a) a TFTD $X(e^{j\omega})$, avaliada pela definição em um conjunto denso de frequências, com plotagem de magnitude e fase; e (b) a TFD de 4 pontos de $x[n]$, com plotagem de magnitude e fase sobrepostas à TFTD, permitindo verificar visualmente que a TFD corresponde exatamente às amostras da TFTD nas frequências discretas $\omega_k = 2\pi k/N$.
+
+\section{Parte III -- Alta Densidade vs. Alta Resolução Espectral}
+
+Para a sequência $x[n] = \cos(0{,}48\pi n) + \cos(0{,}52\pi n)$, soma de duas senoides de frequências normalizadas muito próximas ($f_1 = 0{,}24$ e $f_2 = 0{,}26$ ciclos/amostra), foram calculadas: (a) a TFD considerando $0 \leq n \leq 10$ ($N=11$ amostras); e (b) a TFD considerando $0 \leq n \leq 100$ ($N=101$ amostras). O objetivo foi investigar se as duas componentes de frequência podem ser distinguidas (resolvidas) em cada caso, ilustrando a diferença conceitual entre uma TFD de \emph{alta densidade} (mais pontos de frequência, mesma duração do sinal) e uma TFD de \emph{alta resolução} (mais amostras do sinal, portanto maior duração de observação).
+
+\section{Parte IV -- Tempo de Execução da FFT}
+
+Foi avaliado o tempo de execução da função \texttt{fft} do Octave para todo $N$ inteiro no intervalo $2 \leq N \leq 2048$, utilizando as funções \texttt{clock} e \texttt{etime} para medir o tempo de CPU decorrido, conforme solicitado no roteiro. Para reduzir a influência de ruído de medição, cada FFT foi repetida múltiplas vezes para cada valor de $N$ e o tempo médio foi calculado. Os valores de $N$ foram classificados em primos e compostos (com auxílio da função \texttt{isprime}) para investigar o impacto da fatorabilidade de $N$ no desempenho do algoritmo.
+
+\chapter{Resultados e Discussões}
+
+\section{Parte I: Validação da Matriz $W_N$}
+
+O Código~1 implementa a matriz $W_N$ definida pela equação \eqref{eq:wn_def} para $N=4$, utilizando a sequência de teste $x[n] = \{1,2,3,4\}$.
+
+\lstinputlisting[language=Matlab, caption={{Script para a Parte I.}}]{codigos/parte1.m}
+
+A construção de $W_N$ é feita de forma totalmente vetorizada, com \texttt{k'*n} gerando a matriz de produtos externos $kn$ e o operador \texttt{exp} aplicado elemento a elemento. Para $N=4$, $W_N(k,n) = e^{-j\frac{\pi}{2}kn} = (-j)^{kn}$, o que produz a matriz:
+\begin{equation}
+  W_4 = \begin{bmatrix}
+    1 & 1 & 1 & 1 \\
+    1 & -j & -1 & j \\
+    1 & -1 & 1 & -1 \\
+    1 & j & -1 & -j
+  \end{bmatrix} \nonumber
+\end{equation}
+
+\textbf{Simetria de $W_N$.} Observa-se que $W_N(k,n) = W_N(n,k)$, pois o produto $kn$ é simétrico em $k$ e $n$ -- ou seja, a matriz $W_N$ é simétrica ($W_N^{\mathsf{T}} = W_N$), embora não seja Hermitiana. Essa propriedade tem uma consequência prática direta na equação de síntese: como $W_N$ é simétrica, $(W_N^{*})^{\mathsf{T}} = W_N^{*}$, de modo que a transposição pode ser omitida na implementação, bastando calcular \texttt{conj(WN)*X} em vez de \texttt{conj(WN).'*X}, exatamente como feito no Código~1 (linha 15).
+
+\textbf{Ortogonalidade e fator de escala.} As colunas de $W_N$ são ortogonais entre si e cada uma possui norma$^2$ igual a $N$, de modo que $W_N^{H}W_N = N\,I_N$ (em que $W_N^H$ é a conjugada transposta). Isso implica que $W_N/\sqrt{N}$ é uma matriz unitária, e justifica diretamente por que a equação de síntese requer o fator de normalização $1/N$: aplicar $W_N^{*}$ (que para $W_N$ simétrica equivale a $W_N^H$) sobre $\mathbf{X} = W_N\mathbf{x}$ resulta em $W_N^{*}W_N\mathbf{x} = N\mathbf{x}$, sendo necessário dividir por $N$ para recuperar $\mathbf{x}$.
+
+\textbf{Verificação numérica.} A execução do Código~1 produziu $X = W_4\,\mathbf{x} = \{10,\ -2+2j,\ -2,\ -2-2j\}$, valor idêntico ao retornado pela função nativa \texttt{fft(x)} do Octave, com erro de norma da ordem de $2{,}3\times10^{-15}$ -- compatível com a precisão de ponto flutuante de double precisão e não com qualquer divergência conceitual entre as duas formulações. A reconstrução $\mathbf{x}_{rec} = \frac{1}{N}W_4^{*}\mathbf{X}$ recuperou a sequência original $\{1,2,3,4\}$ com erro de norma da ordem de $1{,}0\times10^{-15}$, confirmando experimentalmente que as equações de análise \eqref{eq:dft_matricial}a e síntese \eqref{eq:dft_matricial}b formam, de fato, um par exato de transformação direta e inversa.
+
+% ------------------------------------------------------------------ %
+\section{Parte II: Pulso Retangular -- TFTD vs. TFD de 4 Pontos}
+
+O Código~2 calcula a TFTD do pulso retangular $x[n]=1$, $0\leq n \leq 3$, pela definição, e compara com a TFD de 4 pontos obtida via \texttt{fft}.
+
+\lstinputlisting[language=Matlab, caption={{Script para a Parte II.}}]{codigos/parte2.m}
+
+Para um pulso retangular de comprimento $N=4$, a forma fechada da TFTD é o núcleo de Dirichlet:
+\begin{equation}
+  X(e^{j\omega}) = \sum_{n=0}^{3} e^{-j\omega n} = e^{-j\frac{3\omega}{2}}\,\frac{\sin(2\omega)}{\sin(\omega/2)}
+  \label{eq:dirichlet}
+\end{equation}
+cuja magnitude $|X(e^{j\omega})| = |\sin(2\omega)/\sin(\omega/2)|$ é plotada na Figura~\ref{fig:p2} (linha azul), juntamente com os 4 pontos da TFD $X[k]$ (marcadores vermelhos), calculados em $\omega_k = 2\pi k /4$, $k=0,1,2,3$, e remapeados para o intervalo $[-\pi,\pi]$ por conveniência de visualização.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figuras/parte2.png}
+\caption{TFTD (linha azul) e TFD de 4 pontos (marcadores vermelhos) do pulso retangular $x[n]=1$, $0\leq n\leq 3$: magnitude e fase.}\label{fig:p2}
+\end{figure}
+
+\textbf{Amostragem da TFTD pela TFD.} A Figura~\ref{fig:p2} evidencia, de forma direta, a propriedade central que relaciona as duas transformadas: \emph{a TFD de $N$ pontos de uma sequência de duração finita $N$ é exatamente a TFTD dessa sequência amostrada nas $N$ frequências discretas $\omega_k = 2\pi k/N$}. Todos os 4 marcadores vermelhos, tanto na magnitude quanto na fase, caem exatamente sobre a curva contínua azul, sem qualquer ajuste ou interpolação -- confirmação visual direta da relação $X[k] = X(e^{j\omega})\big|_{\omega = 2\pi k/N}$.
+
+\textbf{Resultado numérico peculiar.} A TFD calculada foi $X[k] = \{4, 0, 0, 0\}$. Esse resultado, embora pareça trivial, ilustra um caso particularmente didático: como a janela de observação ($N=4$ amostras) coincide exatamente com o suporte do pulso retangular, o sinal observado é constante (\,$x[n]=1$ para todo $n$ na janela\,), de modo que toda a sua energia se concentra na componente DC ($k=0$, valendo $4 = \sum_n x[n]$). Os zeros do núcleo de Dirichlet \eqref{eq:dirichlet} ocorrem precisamente em $\omega = \pi/2, \pi, 3\pi/2$ -- que são exatamente as frequências discretas amostradas pela TFD para $k=1,2,3$. Esta coincidência não é acidental: sempre que um sinal periódico (ou, como aqui, um sinal constante, caso particular de período $1$) é amostrado em uma janela com duração múltipla inteira de seu período, sua TFD apresenta energia apenas nos múltiplos inteiros da frequência fundamental, sem qualquer espalhamento espectral (\emph{leakage}).
+
+\textbf{Fase.} Como $X[1]=X[2]=X[3]=0$ (números complexos nulos), a função \texttt{angle()} do Octave retorna fase $0$ por convenção para esses pontos, o que explica os quatro marcadores de fase alinhados em $0$ rad na Figura~\ref{fig:p2} (à direita). Já a fase da TFTD contínua varia de forma linear por trechos entre os zeros do núcleo de Dirichlet, com saltos de $\pi$ característicos de uma função real que muda de sinal -- comportamento típico de pulsos retangulares e consistente com a teoria de filtros FIR de fase linear discutida por Oppenheim e Willsky \cite{oppenheim_willsky}.
+
+% ------------------------------------------------------------------ %
+\section{Parte III: Alta Densidade vs. Alta Resolução Espectral}
+
+O Código~3 calcula a TFD de $x[n] = \cos(0{,}48\pi n) + \cos(0{,}52\pi n)$ para dois comprimentos de janela distintos, $N=11$ e $N=101$.
+
+\lstinputlisting[language=Matlab, caption={{Script para a Parte III.}}]{codigos/parte3.m}
+
+A resolução espectral de uma TFD de $N$ pontos -- isto é, a menor separação em frequência normalizada que permite distinguir duas componentes espectrais distintas -- é aproximadamente:
+\begin{equation}
+  \Delta f \approx \frac{1}{N}
+  \label{eq:resolucao}
+\end{equation}
+As duas senoides do sinal possuem frequências normalizadas $f_1 = 0{,}24$ e $f_2 = 0{,}26$ (a partir de $\omega = 0{,}48\pi$ e $\omega = 0{,}52\pi$, com $f=\omega/2\pi$), separadas por $\Delta f_{sinal} = 0{,}02$ ciclos/amostra.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figuras/parte3.png}
+\caption{TFD de $x[n]=\cos(0{,}48\pi n)+\cos(0{,}52\pi n)$ para $N=11$ (baixa resolução, esquerda) e $N=101$ (alta resolução, direita).}\label{fig:p3}
+\end{figure}
+
+\textbf{Caso $N=11$ (baixa resolução).} Pela equação \eqref{eq:resolucao}, $\Delta f \approx 1/11 \approx 0{,}091$, valor mais de quatro vezes maior do que a separação real entre as duas senoides ($0{,}02$). Como consequência, o painel esquerdo da Figura~\ref{fig:p3} mostra um único lóbulo dominante, próximo de $f \approx 0{,}273$ (o \emph{bin} mais próximo de $k/N$ que captura a energia combinada das duas senoides), sem qualquer indício visual de que o sinal é, na verdade, composto por duas componentes distintas. As duas frequências são indistinguíveis: diz-se que a TFD, neste caso, não tem resolução suficiente para separá-las, embora os $N=11$ pontos calculados já representem o espectro completo dessa janela (não há, portanto, falta de \emph{densidade} de pontos -- a limitação é estrutural, decorrente da curta duração da observação).
+
+\textbf{Caso $N=101$ (alta resolução).} Com $N=101$ amostras, $\Delta f \approx 1/101 \approx 0{,}0099$, menor que a separação real de $0{,}02$ ciclos/amostra entre as senoides. O painel direito da Figura~\ref{fig:p3} confirma que, neste caso, as duas componentes são plenamente resolvidas: observam-se dois picos distintos e bem definidos, um próximo de $f \approx 0{,}238$ e outro próximo de $f \approx 0{,}257$, com um vale claro entre eles. Os múltiplos lóbulos secundários visíveis entre os dois picos principais são consequência da convolução do espectro com o núcleo de Dirichlet associado à janela retangular de $101$ amostras -- o mesmo fenômeno de espalhamento espectral discutido na Parte II, porém aqui com lóbulos suficientemente estreitos para não mascarar os dois picos de interesse.
+
+\textbf{Densidade vs. resolução -- distinção conceitual.} É importante destacar a diferença entre \emph{aumentar a densidade espectral} (calcular a TFD em mais pontos de frequência através de \emph{zero-padding}, sem alterar a duração real do sinal observado) e \emph{aumentar a resolução espectral} (coletar mais amostras reais do sinal, aumentando sua duração de observação), distinção amplamente discutida por Ingle e Proakis \cite{ingle2017}. No experimento realizado, a transição de $N=11$ para $N=101$ corresponde ao segundo caso: foram coletadas $101$ amostras genuínas do sinal (não apenas zeros adicionados), o que efetivamente aumenta a resolução, conforme previsto pela equação \eqref{eq:resolucao}. Se, em vez disso, tivéssemos aplicado \emph{zero-padding} às $11$ amostras originais para obter uma TFD de $101$ pontos, o resultado seria uma curva mais densamente amostrada da \emph{mesma} TFTD subjacente -- ainda exibindo um único lóbulo largo, pois a informação adicional sobre as duas frequências simplesmente não está presente em apenas $11$ amostras reais do sinal.
+
+% ------------------------------------------------------------------ %
+\section{Parte IV: Tempo de Execução da FFT}
+
+O Código~4 mede o tempo médio de execução da função \texttt{fft} para cada $N$ inteiro no intervalo $2 \leq N \leq 2048$, repetindo o cálculo $50$ vezes por valor de $N$ e utilizando \texttt{clock}/\texttt{etime} para a medição de tempo, conforme solicitado no roteiro.
+
+\lstinputlisting[language=Matlab, caption={{Script para a Parte IV.}}]{codigos/parte4.m}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figuras/parte4.png}
+\caption{Tempo médio de execução da \texttt{fft} para $2 \leq N \leq 2048$, separado em $N$ primo (vermelho) e $N$ composto (azul).}\label{fig:p4}
+\end{figure}
+
+\textbf{Tendência geral.} A Figura~\ref{fig:p4} mostra que o tempo de execução cresce, em média, com $N$, comportamento consistente com a complexidade assintótica $O(N\log N)$ do algoritmo FFT -- ainda que, para os valores de $N$ aqui avaliados (até $2048$), o crescimento absoluto seja modesto, da ordem de microssegundos a décimos de milissegundo.
+
+\textbf{Primos vs. compostos.} A separação por cor evidencia claramente que os valores primos de $N$ (vermelho) apresentam, de forma sistemática, tempos de execução superiores aos valores compostos de mesma ordem de grandeza (azul). Numericamente, o tempo médio para $N$ primo foi de $1{,}80\times10^{-4}\,\text{s}$, contra $9{,}90\times10^{-5}\,\text{s}$ para $N$ composto -- uma razão de aproximadamente $1{,}8\times$. Essa diferença é explicada pela própria estrutura do algoritmo FFT: quando $N$ é altamente fatorável (em particular potências de $2$, como $N=2048=2^{11}$, cujo tempo médio medido foi $1{,}19\times10^{-4}\,\text{s}$), o algoritmo decompõe recursivamente o problema em subproblemas menores via a estratégia \emph{dividir para conquistar} de Cooley-Tukey, atingindo a complexidade ótima $O(N\log N)$. Quando $N$ é primo, essa decomposição recursiva não é possível, e a biblioteca FFTW (utilizada internamente pelo Octave) recorre a algoritmos alternativos -- como o algoritmo de Bluestein, que reescreve a TFD como uma convolução e a calcula via FFTs de tamanho composto maior (tipicamente potência de $2$) -- que, embora ainda assintoticamente $O(N\log N)$, possuem fator constante de overhead consideravelmente maior, conforme discutido por Proakis e Manolakis \cite{proakis_manolakis}. Esta razão de aproximadamente $1{,}8\times$ mostrou-se estável ao se repetir o experimento completo em execuções independentes do Código~4, confirmando que se trata de uma tendência sistemática e não de um artefato de uma única medição.
+
+\textbf{Valor atípico.} O maior tempo isolado observado neste experimento ocorreu em $N=1936$ (composto, pois $1936 = 2^4 \times 11^2$), com $t \approx 3{,}90\times10^{-4}\,\text{s}$ -- um valor bem acima da tendência geral dos compostos vizinhos. Ao repetir a execução completa do Código~4 diversas vezes, observou-se que $N=1936$ reaparece como o maior tempo isolado na maioria das repetições, o que indica que essa lentidão \emph{não} é mero ruído de medição, mas sim, em boa parte, uma propriedade genuína do algoritmo para esse $N$ específico: embora $1936$ seja composto, seu único fator primo além de $2$ é $11$ (elevado ao quadrado), um fator que a biblioteca FFTW não decompõe de forma tão eficiente quanto os fatores pequenos e mais comuns ($2,3,5,7$) presentes nos demais compostos do intervalo, aproximando seu desempenho do observado para valores primos. Em ao menos uma das repetições, no entanto, o maior tempo isolado recaiu sobre um valor primo ($N=1811$) em vez de $N=1936$, evidenciando que o ruído inerente à medição de tempo de parede (\emph{wall-clock time}) via \texttt{clock}/\texttt{etime} -- decorrente de interrupções do sistema operacional, efeitos de cache da CPU e variações momentâneas de carga da máquina -- também contribui para alguma variabilidade na identidade exata do valor mais lento entre execuções. Isso reforça a importância de repetir cada medição múltiplas vezes (no experimento, $50$ repetições por valor de $N$, além de múltiplas execuções completas do script para esta validação) e analisar tendências médias e reproduzíveis, em vez de valores isolados de uma única execução, ao se avaliar desempenho computacional experimentalmente.
+
+\chapter{Conclusão}
+
+Este laboratório consolidou o estudo da Transformada de Fourier Discreta (TFD) em suas dimensões matricial, espectral e computacional. Através das quatro atividades realizadas, foi possível:
+
+\begin{itemize}
+  \item Implementar e validar as equações vetoriais de análise e síntese da TFD por meio da matriz $W_N$, identificando suas propriedades de simetria e ortogonalidade, e confirmar numericamente que a formulação matricial é equivalente, a menos de erro de arredondamento de ponto flutuante, à função nativa \texttt{fft} do Octave.
+  \item Verificar experimentalmente que a TFD de um sinal de duração $N$ corresponde exatamente às amostras da TFTD nesse sinal nas frequências discretas $\omega_k = 2\pi k/N$, observando o caso particular -- e didaticamente revelador -- de um pulso retangular cuja TFD de 4 pontos concentra toda a energia na componente DC.
+  \item Distinguir, de forma experimental, os conceitos de densidade espectral e resolução espectral, evidenciando que apenas o aumento genuíno do número de amostras observadas (e não meramente o número de pontos de frequência calculados) é capaz de separar duas componentes de frequência próximas.
+  \item Avaliar empiricamente o tempo de execução da FFT em função de $N$, confirmando que valores primos de $N$ resultam em tempos de execução sistematicamente maiores do que valores compostos, em concordância com a teoria dos algoritmos de fatoração utilizados pela biblioteca FFTW.
+\end{itemize}
+
+O Octave \cite{octaveman} demonstrou-se, novamente, uma plataforma adequada tanto para a implementação numérica direta das equações teóricas quanto para a investigação experimental do desempenho computacional de algoritmos de processamento de sinais. Os resultados obtidos estão em plena concordância com a teoria apresentada por Proakis e Manolakis \cite{proakis_manolakis}, Oppenheim e Willsky \cite{oppenheim_willsky} e Ingle e Proakis \cite{ingle2017}.
+
+% ----------------------------------------------------------------------------------------------------- %
+\backmatter
+\singlespacing
+% ----------------------------------------------------------------------------------------------------- %
+\bibliography{relatorio_5}
+
+\end{document}

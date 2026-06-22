@@ -1,0 +1,35 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.7 }
+
+\bibitem[Eaton et al. 2025]{octaveman}
+\abntrefinfo{Eaton et al.}{EATON et al.}{2025}
+{EATON, J.~W. et al. \textbf{GNU Octave version 10.3.0 Reference Manual}.
+[S.l.], 2025. Dispon{\'\i}vel em:
+  \url{https://www.gnu.org/software/octave/doc/v10.3.0/}.}
+
+\bibitem[Ingle e Proakis 2017]{ingle2017}
+\abntrefinfo{Ingle e Proakis}{INGLE; PROAKIS}{2017}
+{INGLE, V.~K.; PROAKIS, J.~G. \textbf{Digital Signal Processing Using MATLAB}.
+  4th. ed. [S.l.]: Cengage Learning, 2017.}
+
+\bibitem[Oppenheim, Willsky e Nawab 1996]{oppenheim_willsky}
+\abntrefinfo{Oppenheim, Willsky e Nawab}{OPPENHEIM; WILLSKY; NAWAB}{1996}
+{OPPENHEIM, A.~V.; WILLSKY, A.~S.; NAWAB, S.~H. \textbf{Signals and Systems}.
+  2nd. ed. [S.l.]: Pearson, 1996.}
+
+\bibitem[Proakis e Manolakis 2021]{proakis_manolakis}
+\abntrefinfo{Proakis e Manolakis}{PROAKIS; MANOLAKIS}{2021}
+{PROAKIS, J.~G.; MANOLAKIS, D.~K. \textbf{Digital Signal Processing:
+  Principles, Algorithms, and Applications}. 5th. ed. [S.l.]: Pearson, 2021.}
+
+\bibitem[UFT 2026]{roteiro05}
+\abntrefinfo{UFT}{UFT}{2026}
+{UFT. \textbf{Roteiro de Laboratório 05: Transformada de Fourier Discreta}.
+  2026.
+Disciplina de Processamento Digital de Sinais.}
+
+\end{thebibliography}

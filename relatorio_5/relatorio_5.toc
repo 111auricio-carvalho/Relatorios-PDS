@@ -1,0 +1,14 @@
+\babel@toc {brazil}{}\relax 
+\contentsline {chapter}{\numberline {1}Introdução}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Metodologia e Procedimentos Práticos}{2}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Parte I -- Equações Vetoriais de Análise e Síntese da TFD}{2}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Parte II -- TFTD e TFD de 4 Pontos do Pulso Retangular}{2}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Parte III -- Alta Densidade vs. Alta Resolução Espectral}{2}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Parte IV -- Tempo de Execução da FFT}{2}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Resultados e Discussões}{4}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Parte I: Validação da Matriz $W_N$}{4}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Parte II: Pulso Retangular -- TFTD vs. TFD de 4 Pontos}{5}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Parte III: Alta Densidade vs. Alta Resolução Espectral}{8}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Parte IV: Tempo de Execução da FFT}{11}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Conclusão}{14}{chapter.4}%
+\contentsline {chapter}{REFER\^ENCIAS}{15}{chapter*.5}%
